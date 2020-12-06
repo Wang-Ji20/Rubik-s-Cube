@@ -289,6 +289,10 @@ void search_cube(char A, char B, char C)//寻找特定角块
 }
 
 //Step1  还原底面白色十字
+void step1(){
+
+}
+
 //step1 将四个白色棱块转至顶部黄色块周围（回头实现）
 //step2 将四个白色棱块转至底部
 void step2()
@@ -308,7 +312,15 @@ void step2()
 
 int main()
 {
-    
+    int corres[] = {2, 4, 1, 3, 0, 5}; //按照前后左右上下来读入
+    for (int i = 0; i < 6; i++)
+        for (int j = 0; j < 3; j++)
+            for (int k = 0; k < 3; k++)
+                cin >> cube[corres[i]][j][k];
+    dbg_show();
+    front_ccw();
+    dbg_show();
+    return 0;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
