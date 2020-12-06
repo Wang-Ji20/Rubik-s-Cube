@@ -291,9 +291,11 @@ void search_cube(char A, char B, char C)//寻找特定角块
 
 }
 
-//Step1  还原底面白色十字
+//Step1  还原底面十字
 void step1(){
-
+    char colorOftheBottom;
+    colorOftheBottom =cube[5][2][2];
+    search_edge();
 }
 
 //step1 将四个白色棱块转至顶部黄色块周围（回头实现）
