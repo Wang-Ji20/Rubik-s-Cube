@@ -253,6 +253,9 @@ void dbg_show() //展示魔方当前状态,debug用
     cout << "        =========" << endl;
 }
 
+void (*op[12])() = {up_ckw, left_ckw, front_ckw, right_ckw, back_ckw, down_ckw,
+                    up_ccw, left_ccw, front_ccw, right_ccw, back_ccw, down_ccw}; //op[i], 0<=i<=5顺时针, 6<=i<=11逆时针, 按照上左前右后下顺序
+
 //== Main Function ==//
 int main()
 {
