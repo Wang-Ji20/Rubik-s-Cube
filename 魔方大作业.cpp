@@ -307,21 +307,7 @@ void step2()
     left_ckw();
 }
 
-//Step2 还原底层四个角块
-//step1 
 
-int main()
-{
-    int corres[] = {2, 4, 1, 3, 0, 5}; //按照前后左右上下来读入
-    for (int i = 0; i < 6; i++)
-        for (int j = 0; j < 3; j++)
-            for (int k = 0; k < 3; k++)
-                cin >> cube[corres[i]][j][k];
-    dbg_show();
-    front_ccw();
-    dbg_show();
-    return 0;
-}
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单
