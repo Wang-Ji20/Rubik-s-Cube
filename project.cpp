@@ -281,6 +281,14 @@ void function_8();
 void function_9();
 void function_10();
 
+struct edge_pieces{
+    char face1;
+    char face2;
+    int face1_pos[6][3][3];
+    int face2_pos[6][3][3];
+};
+
+
 struct corner_pieces {
     char first_side;
     char second_side;
@@ -290,11 +298,15 @@ void search_cube(char A, char B, char C)//寻找特定角块
 {
 
 }
+edge_pieces search_edges(){
+
+}
 
 //Step1  还原底面十字
 void step1(){
     char colorOftheBottom;
     colorOftheBottom =cube[5][2][2];
+    
     search_edge();
 }
 
