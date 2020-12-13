@@ -30,16 +30,16 @@ char cube[6][3][3] = {0}; //表示魔方状态
 struct edge_pieces{
     char face1;
     char face2;
-    int face1_pos[6][3][3];
-    int face2_pos[6][3][3];
+    int face1_pos[6][3][3]={{{0}}};
+    int face2_pos[6][3][3]={{{0}}};
 };
 struct corner_pieces {
     char face1;
     char face2;
     char face3;
-    int face1_pos[6][3][3];
-    int face2_pos[6][3][3];
-    int face3_pos[6][3][3];
+    int face1_pos[6][3][3]={{{0}}};
+    int face2_pos[6][3][3]={{{0}}};
+    int face3_pos[6][3][3]={{{0}}};
 };
 
 
@@ -57,17 +57,421 @@ void function_7();
 void function_8();
 void function_9();
 void function_10();
-
 //== Functions ==//
-corner_pieces search_corners(corner_pieces corner)//寻找特定角块
-{
 
-
-
+corner_pieces search_corners(corner_pieces corner)//寻找特定角块,
+{//每个块的顺序：abc,acb,bac,bca,cab,cba
+    if(cube[0][0][2]==corner.face1 && cube[1][0][0]==corner.face2 && cube[4][0][2]==corner.face3)//第一大种
+    {
+        corner.face1_pos[0][0][2]=1;
+        corner.face2_pos[1][0][0]=1;
+        corner.face3_pos[4][0][2]=1;
+    }
+    else if(cube[0][0][2]==corner.face1 && cube[4][0][2]==corner.face2 && cube[1][0][0]==corner.face3)
+    {
+        corner.face1_pos[0][0][2]=1;
+        corner.face2_pos[4][0][2]=1;
+        corner.face3_pos[1][0][0]=1;
+    }
+    else if(cube[1][0][0]==corner.face1 && cube[0][0][2]==corner.face2 && cube[4][0][2]==corner.face3)
+    {
+        corner.face1_pos[1][0][0]=1;
+        corner.face2_pos[0][0][2]=1;
+        corner.face3_pos[4][0][2]=1;
+    }
+    else if(cube[1][0][0]==corner.face1 && cube[4][0][2]==corner.face2 && cube[0][0][2]==corner.face3)
+    {
+        corner.face1_pos[1][0][0]=1;
+        corner.face2_pos[4][0][2]=1;
+        corner.face3_pos[0][0][2]=1;
+    }
+    else if(cube[4][0][2]==corner.face1 && cube[0][0][2]==corner.face2 && cube[1][0][0]==corner.face3)
+    {
+        corner.face1_pos[4][0][2]=1;
+        corner.face2_pos[0][0][2]=1;
+        corner.face3_pos[1][0][0]=1;
+    }
+    else if(cube[4][0][2]==corner.face1 && cube[1][0][0]==corner.face2 && cube[0][0][2]==corner.face3)
+    {
+        corner.face1_pos[4][0][2]=1;
+        corner.face2_pos[1][0][0]=1;
+        corner.face3_pos[0][0][2]=1;
+    }
+    else if(cube[0][0][0]==corner.face1 && cube[1][0][2]==corner.face2 && cube[2][0][0]==corner.face3)//第二大种
+    {
+        corner.face1_pos[0][0][0]=1;
+        corner.face2_pos[1][0][2]=1;
+        corner.face3_pos[2][0][0]=1;
+    }
+        else if(cube[0][0][0]==corner.face1 && cube[2][0][0]==corner.face2 && cube[1][0][2]==corner.face3)
+    {
+        corner.face1_pos[0][0][0]=1;
+        corner.face2_pos[2][0][0]=1;
+        corner.face3_pos[1][0][2]=1;
+    }
+    else if(cube[1][0][2]==corner.face1 && cube[0][0][0]==corner.face2 && cube[2][0][0]==corner.face3)
+    {
+        corner.face1_pos[1][0][2]=1;
+        corner.face2_pos[0][0][0]=1;
+        corner.face3_pos[2][0][0]=1;
+    }
+    else if(cube[1][0][2]==corner.face1 && cube[2][0][0]==corner.face2 && cube[0][0][0]==corner.face3)
+    {
+        corner.face1_pos[1][0][2]=1;
+        corner.face2_pos[2][0][0]=1;
+        corner.face3_pos[0][0][0]=1;
+    }
+    else if(cube[2][0][0]==corner.face1 && cube[0][0][0]==corner.face2 && cube[1][0][2]==corner.face3)
+    {
+        corner.face1_pos[2][0][0]=1;
+        corner.face2_pos[0][0][0]=1;
+        corner.face3_pos[1][0][0]=1;
+    }
+    else if(cube[2][0][0]==corner.face1 && cube[1][0][2]==corner.face2 && cube[0][0][0]==corner.face3)
+    {
+        corner.face1_pos[2][0][0]=1;
+        corner.face2_pos[1][0][2]=1;
+        corner.face3_pos[0][0][0]=1;
+    }
+    else if(cube[0][2][0]==corner.face1 && cube[2][0][2]==corner.face2 && cube[3][0][0]==corner.face3)//第三大种002、100、402
+    {
+        corner.face1_pos[0][2][0]=1;
+        corner.face2_pos[2][0][2]=1;
+        corner.face3_pos[3][0][0]=1;
+    }
+       else if(cube[0][2][0]==corner.face1 && cube[3][0][0]==corner.face2 && cube[2][0][2]==corner.face3)
+    {
+        corner.face1_pos[0][2][0]=1;
+        corner.face2_pos[3][0][0]=1;
+        corner.face3_pos[2][0][2]=1;
+    }
+    else if(cube[2][0][2]==corner.face1 && cube[0][2][0]==corner.face2 && cube[3][0][0]==corner.face3)
+    {
+        corner.face1_pos[2][0][2]=1;
+        corner.face2_pos[0][2][0]=1;
+        corner.face3_pos[3][0][0]=1;
+    }
+    else if(cube[2][0][2]==corner.face1 && cube[3][0][0]==corner.face2 && cube[0][2][0]==corner.face3)
+    {
+        corner.face1_pos[2][0][2]=1;
+        corner.face2_pos[3][0][0]=1;
+        corner.face3_pos[0][2][0]=1;
+    }
+    else if(cube[3][0][0]==corner.face1 && cube[0][2][0]==corner.face2 && cube[2][0][2]==corner.face3)
+    {
+        corner.face1_pos[3][0][0]=1;
+        corner.face2_pos[0][2][0]=1;
+        corner.face3_pos[2][0][2]=1;
+    }
+    else if(cube[3][0][0]==corner.face1 && cube[2][0][2]==corner.face2 && cube[0][2][0]==corner.face3)
+    {
+        corner.face1_pos[3][0][0]=1;
+        corner.face2_pos[2][0][2]=1;
+        corner.face3_pos[0][2][0]=1;
+    }
+    else if(cube[0][2][2]==corner.face1 && cube[3][0][2]==corner.face2 && cube[4][0][0]==corner.face3)//第四大种
+    {
+        corner.face1_pos[0][2][2]=1;
+        corner.face2_pos[3][0][2]=1;
+        corner.face3_pos[4][0][0]=1;
+    }
+   else if(cube[0][2][2]==corner.face1 && cube[3][0][2]==corner.face2 && cube[4][0][0]==corner.face3)
+    {
+        corner.face1_pos[0][2][2]=1;
+        corner.face2_pos[3][0][2]=1;
+        corner.face3_pos[4][0][0]=1;
+    }
+    else if(cube[4][0][0]==corner.face1 && cube[0][2][2]==corner.face2 && cube[3][0][2]==corner.face3)
+    {
+        corner.face1_pos[4][0][0]=1;
+        corner.face2_pos[0][2][2]=1;
+        corner.face3_pos[3][0][2]=1;
+    }
+    else if(cube[4][0][0]==corner.face1 && cube[3][0][2]==corner.face2 && cube[0][2][2]==corner.face3)
+    {
+        corner.face1_pos[4][0][0]=1;
+        corner.face2_pos[3][0][2]=1;
+        corner.face3_pos[0][2][2]=1;
+    }
+    else if(cube[3][0][2]==corner.face1 && cube[0][2][2]==corner.face2 && cube[4][0][0]==corner.face3)
+    {
+        corner.face1_pos[3][0][2]=1;
+        corner.face2_pos[0][2][2]=1;
+        corner.face3_pos[4][0][0]=1;
+    }
+    else if(cube[3][0][2]==corner.face1 && cube[4][0][0]==corner.face2 && cube[0][2][2]==corner.face3)
+    {
+        corner.face1_pos[3][0][2]=1;
+        corner.face2_pos[4][0][0]=1;
+        corner.face3_pos[0][2][2]=1;
+    }
+    else if(cube[1][2][0]==corner.face1 && cube[4][2][2]==corner.face2 && cube[5][2][2]==corner.face3)//第五大种
+    {
+        corner.face1_pos[1][2][0]=1;
+        corner.face2_pos[4][2][2]=1;
+        corner.face3_pos[5][2][2]=1;
+    }
+    else if(cube[1][2][0]==corner.face1 && cube[5][2][2]==corner.face2 && cube[4][2][2]==corner.face3)
+    {
+        corner.face1_pos[1][2][0]=1;
+        corner.face2_pos[5][2][2]=1;
+        corner.face3_pos[4][2][2]=1;
+    }
+    else if(cube[4][2][2]==corner.face1 && cube[1][2][0]==corner.face2 && cube[5][2][2]==corner.face3)
+    {
+        corner.face1_pos[4][2][2]=1;
+        corner.face2_pos[1][2][0]=1;
+        corner.face3_pos[5][2][2]=1;
+    }
+    else if(cube[4][2][2]==corner.face1 && cube[5][2][2]==corner.face2 && cube[1][2][0]==corner.face3)
+    {
+        corner.face1_pos[4][2][2]=1;
+        corner.face2_pos[4][0][2]=1;
+        corner.face3_pos[1][2][0]=1;
+    }
+    else if(cube[5][2][2]==corner.face1 && cube[1][2][0]==corner.face2 && cube[4][2][2]==corner.face3)
+    {
+        corner.face1_pos[5][2][2]=1;
+        corner.face2_pos[1][2][0]=1;
+        corner.face3_pos[4][2][2]=1;
+    }
+    else if(cube[5][2][2]==corner.face1 && cube[4][2][2]==corner.face2 && cube[1][2][0]==corner.face3)
+    {
+        corner.face1_pos[5][2][2]=1;
+        corner.face2_pos[4][2][2]=1;
+        corner.face3_pos[1][2][0]=1;
+    }
+    else if(cube[1][2][2]==corner.face1 && cube[2][2][0]==corner.face2 && cube[5][2][0]==corner.face3)//第六大种
+    {
+        corner.face1_pos[1][2][2]=1;
+        corner.face2_pos[2][2][0]=1;
+        corner.face3_pos[5][2][0]=1;
+    }
+        else if(cube[1][2][2]=corner.face1 && cube[5][2][0]==corner.face2 && cube[2][2][0]==corner.face3)
+    {
+        corner.face1_pos[1][2][2]=1;
+        corner.face2_pos[5][2][0]=1;
+        corner.face3_pos[2][2][0]=1;
+    }
+    else if(cube[2][2][0]==corner.face1 && cube[1][2][2]==corner.face2 && cube[5][2][0]==corner.face3)
+    {
+        corner.face1_pos[2][2][0]=1;
+        corner.face2_pos[1][2][2]=1;
+        corner.face3_pos[5][2][0]=1;
+    }
+    else if(cube[2][2][0]==corner.face1 && cube[5][2][0]==corner.face2 && cube[1][2][2]==corner.face3)
+    {
+        corner.face1_pos[2][2][0]=1;
+        corner.face2_pos[5][2][0]=1;
+        corner.face3_pos[1][2][2]=1;
+    }
+    else if(cube[5][2][0]==corner.face1 && cube[1][2][2]==corner.face2 && cube[2][2][0]==corner.face3)
+    {
+        corner.face1_pos[5][2][0]=1;
+        corner.face2_pos[1][2][2]=1;
+        corner.face3_pos[2][2][0]=1;
+    }
+    else if(cube[5][2][0]==corner.face1 && cube[2][2][0]==corner.face2 && cube[1][2][2]==corner.face3)
+    {
+        corner.face1_pos[5][2][0]=1;
+        corner.face2_pos[2][2][0]=1;
+        corner.face3_pos[1][2][2]=1;
+    }
+    else if(cube[2][2][2]==corner.face1 && cube[3][2][0]==corner.face2 && cube[5][0][0]==corner.face3)//第七大种002、100、402
+    {
+        corner.face1_pos[2][2][2]=1;
+        corner.face2_pos[3][2][0]=1;
+        corner.face3_pos[5][0][0]=1;
+    }
+       else if(cube[2][2][2]==corner.face1 && cube[5][0][0]==corner.face2 && cube[3][2][0]==corner.face3)
+    {
+        corner.face1_pos[2][2][2]=1;
+        corner.face2_pos[5][0][0]=1;
+        corner.face3_pos[3][2][0]=1;
+    }
+    else if(cube[3][2][0]==corner.face1 && cube[2][2][2]==corner.face2 && cube[5][0][0]==corner.face3)
+    {
+        corner.face1_pos[3][2][0]=1;
+        corner.face2_pos[2][2][2]=1;
+        corner.face3_pos[5][0][0]=1;
+    }
+    else if(cube[3][2][0]==corner.face1 && cube[5][0][0]==corner.face2 && cube[2][2][2]==corner.face3)
+    {
+        corner.face1_pos[3][2][0]=1;
+        corner.face2_pos[5][0][0]=1;
+        corner.face3_pos[2][2][2]=1;
+    }
+    else if(cube[5][0][0]==corner.face1 && cube[2][2][2]==corner.face2 && cube[3][2][0]==corner.face3)
+    {
+        corner.face1_pos[5][0][0]=1;
+        corner.face2_pos[2][2][2]=1;
+        corner.face3_pos[3][2][0]=1;
+    }
+    else if(cube[5][0][0]==corner.face1 && cube[3][2][0]==corner.face2 && cube[2][2][2]==corner.face3)
+    {
+        corner.face1_pos[5][0][0]=1;
+        corner.face2_pos[3][2][0]=1;
+        corner.face3_pos[2][2][2]=1;
+    }
+    else if(cube[0][2][2]==corner.face1 && cube[3][0][2]==corner.face2 && cube[4][0][0]==corner.face3)//第八大种
+    {
+        corner.face1_pos[0][2][2]=1;
+        corner.face2_pos[3][0][2]=1;
+        corner.face3_pos[4][0][0]=1;
+    }
+   else if(cube[0][2][2]==corner.face1 && cube[3][0][2]==corner.face2 && cube[4][0][0]==corner.face3)
+    {
+        corner.face1_pos[0][2][2]=1;
+        corner.face2_pos[3][0][2]=1;
+        corner.face3_pos[4][0][0]=1;
+    }
+    else if(cube[4][0][0]==corner.face1 && cube[0][2][2]==corner.face2 && cube[3][0][2]==corner.face3)
+    {
+        corner.face1_pos[4][0][0]=1;
+        corner.face2_pos[0][2][2]=1;
+        corner.face3_pos[3][0][2]=1;
+    }
+    else if(cube[4][0][0]==corner.face1 && cube[3][0][2]==corner.face2 && cube[0][2][2]==corner.face3)
+    {
+        corner.face1_pos[4][0][0]=1;
+        corner.face2_pos[3][0][2]=1;
+        corner.face3_pos[0][2][2]=1;
+    }
+    else if(cube[3][0][2]==corner.face1 && cube[0][2][2]==corner.face2 && cube[4][0][0]==corner.face3)
+    {
+        corner.face1_pos[3][0][2]=1;
+        corner.face2_pos[0][2][2]=1;
+        corner.face3_pos[4][0][0]=1;
+    }
+    else if(cube[3][0][2]==corner.face1 && cube[4][0][0]==corner.face2 && cube[0][2][2]==corner.face3)
+    {
+        corner.face1_pos[3][0][2]=1;
+        corner.face2_pos[4][0][0]=1;
+        corner.face3_pos[0][2][2]=1;
+    }
 }
-edge_pieces search_edges(edge_pieces edge){//寻找特定棱块
-
-
+edge_pieces search_edges(edge_pieces edge)
+{//寻找特定棱块
+ if(cube[0][0][1]==edge.face1 &&cube[1][0][1]==edge.face2)//第一种
+ {
+    edge.face1_pos[0][0][1]=1;
+    edge.face2_pos[1][0][1]=1;
+ }
+ else if(cube[1][0][1]==edge.face1 &&cube[0][0][1]==edge.face2)
+{
+    edge.face1_pos[1][0][1]=1;
+    edge.face2_pos[0][0][1]=1;
+}
+else if(cube[0][1][0]==edge.face1 &&cube[2][0][1]==edge.face2)//第二种
+{
+    edge.face1_pos[0][1][0]=1;
+    edge.face2_pos[2][0][1]=1;
+}
+else if(cube[2][0][1]==edge.face1 &&cube[0][1][0]==edge.face2)
+{
+    edge.face1_pos[2][0][1]=1;
+    edge.face2_pos[0][1][0]=1;
+}
+else if(cube[0][2][1]==edge.face1 &&cube[3][0][1]==edge.face2)//第三种
+{
+    edge.face1_pos[0][2][1]=1;
+    edge.face2_pos[3][0][1]=1;
+}
+else if(cube[3][0][1]==edge.face1 &&cube[0][2][1]==edge.face2)
+{
+    edge.face1_pos[0][2][1]=1;
+    edge.face2_pos[3][0][1]=1;
+}
+ else if(cube[0][1][2]==edge.face1 &&cube[4][0][1]==edge.face2)//第四种
+ {
+    edge.face1_pos[0][1][2]=1;
+    edge.face2_pos[4][0][1]=1;
+ }
+ else if(cube[4][0][1]==edge.face1 &&cube[0][1][2]==edge.face2)
+{
+    edge.face1_pos[4][0][1]=1;
+    edge.face2_pos[0][1][2]=1;
+}
+else if(cube[1][1][0]==edge.face1 &&cube[4][1][2]==edge.face2)//第五种
+{
+    edge.face1_pos[1][1][0]=1;
+    edge.face2_pos[4][1][2]=1;
+}
+else if(cube[4][1][2]==edge.face1 &&cube[1][1][0]==edge.face2)
+{
+    edge.face1_pos[4][1][2]=1;
+    edge.face2_pos[1][1][0]=1;
+}
+else if(cube[1][1][2]==edge.face1 &&cube[2][1][0]==edge.face2)//第六种
+{
+    edge.face1_pos[1][1][2]=1;
+    edge.face2_pos[2][1][0]=1;
+}
+else if(cube[2][1][0]==edge.face1 &&cube[1][1][2]==edge.face2)
+{
+    edge.face1_pos[2][1][0]=1;
+    edge.face2_pos[1][1][2]=1;
+}
+ else if(cube[2][1][2]==edge.face1 &&cube[3][1][0]==edge.face2)//第七种
+ {
+    edge.face1_pos[2][1][2]=1;
+    edge.face2_pos[3][1][0]=1;
+ }
+ else if(cube[3][1][0]==edge.face1 &&cube[2][1][2]==edge.face2)
+{
+    edge.face1_pos[3][1][0]=1;
+    edge.face2_pos[2][1][2]=1;
+}
+else if(cube[3][1][2]==edge.face1 &&cube[4][1][0]==edge.face2)//第八种
+{
+    edge.face1_pos[3][1][2]=1;
+    edge.face2_pos[4][1][0]=1;
+}
+else if(cube[4][1][0]==edge.face1 &&cube[3][1][2]==edge.face2)
+{
+    edge.face1_pos[4][1][0]=1;
+    edge.face2_pos[3][1][2]=1;
+}
+else if(cube[1][2][1]==edge.face1 &&cube[5][2][1]==edge.face2)//第九种
+{
+    edge.face1_pos[1][2][1]=1;
+    edge.face2_pos[5][2][1]=1;
+}
+else if(cube[5][2][1]==edge.face1 &&cube[1][2][1]==edge.face2)
+{
+    edge.face1_pos[5][2][1]=1;
+    edge.face2_pos[1][2][1]=1;
+}
+ else if(cube[2][2][1]==edge.face1 &&cube[5][1][0]==edge.face2)//第十种
+ {
+    edge.face1_pos[2][2][1]=1;
+    edge.face2_pos[5][1][0]=1;
+ }
+ else if(cube[5][1][0]==edge.face1 &&cube[2][2][1]==edge.face2)
+{
+    edge.face1_pos[5][1][0]=1;
+    edge.face2_pos[2][2][1]=1;
+}
+else if(cube[3][2][1]==edge.face1 &&cube[5][0][1]==edge.face2)//第十一种
+{
+    edge.face1_pos[3][2][1]=1;
+    edge.face2_pos[5][0][1]=1;
+}
+else if(cube[5][0][1]==edge.face1 &&cube[3][2][1]==edge.face2)
+{
+    edge.face1_pos[5][0][1]=1;
+    edge.face2_pos[3][2][1]=1;
+}
+else if(cube[4][2][1]==edge.face1 &&cube[5][1][2]==edge.face2)//第十二种
+{
+    edge.face1_pos[4][2][1]=1;
+    edge.face2_pos[5][1][2]=1;
+}
+else if(cube[5][1][2]==edge.face1 &&cube[4][2][1]==edge.face2)
+{
+    edge.face1_pos[5][1][2]=1;
+    edge.face2_pos[4][2][1]=1;
+}
 
 }
 
