@@ -25,10 +25,53 @@
 #include <stdlib.h>
 using namespace std;
 
-//== Global Variables ==//
+//== Global Variables and Structures ==//
 char cube[6][3][3] = {0}; //表示魔方状态
+struct edge_pieces{
+    char face1;
+    char face2;
+    int face1_pos[6][3][3];
+    int face2_pos[6][3][3];
+};
+struct corner_pieces {
+    char face1;
+    char face2;
+    char face3;
+    int face1_pos[6][3][3];
+    int face2_pos[6][3][3];
+    int face3_pos[6][3][3];
+};
+
+
+
+// ==== Claim of Functions
+void face_ckw(int face) ;
+void face_ccw(int face) ;
+void function_1();
+void function_2();
+void function_3();
+void function_4();
+void function_5();
+void function_6();
+void function_7();
+void function_8();
+void function_9();
+void function_10();
 
 //== Functions ==//
+corner_pieces search_corners(corner_pieces corner)//寻找特定角块
+{
+
+
+
+}
+edge_pieces search_edges(edge_pieces edge){//寻找特定棱块
+
+
+
+}
+
+
 void face_ckw(int face) //简化旋转函数的两个函数
 {
     int tmp[3][3];
@@ -256,6 +299,65 @@ void dbg_show() //展示魔方当前状态,debug用
 void (*op[12])() = {up_ckw, left_ckw, front_ckw, right_ckw, back_ckw, down_ckw,
                     up_ccw, left_ccw, front_ccw, right_ccw, back_ccw, down_ccw}; //op[i], 0<=i<=5顺时针, 6<=i<=11逆时针, 按照上左前右后下顺序
 
+/*
+1.还原底部十字
+2.还原底部棱块
+3.解决中间层
+4.还原顶部十字
+5.还原顶部角块
+6 让顶部全是相同颜色
+7 让顶部角块正确
+8 让顶部棱块正确
+
+12一个人 3，找角块，找棱块一个人 5678一个人
+
+*/
+
+
+
+void step1(){
+    char colorOftheBottom;
+    colorOftheBottom =cube[5][2][2];
+    
+    search_edges();
+}
+
+
+void step2()
+{
+    front_ckw();
+    front_ckw();
+    right_ckw();
+    right_ckw();
+    back_ckw();
+    back_ckw();
+    left_ckw();
+    left_ckw();
+}
+
+void step3(){
+
+}
+
+void step4(){
+
+
+}
+
+void step5(){
+
+}
+
+void step6(){
+
+}
+
+void step7(){
+
+}
+void step8(){
+
+}
 //== Main Function ==//
 int main()
 {
@@ -269,70 +371,3 @@ int main()
     dbg_show();
     return 0;
 }
-
-void function_1();
-void function_2();
-void function_3();
-void function_4();
-void function_5();
-void function_6();
-void function_7();
-void function_8();
-void function_9();
-void function_10();
-
-struct edge_pieces{
-    char face1;
-    char face2;
-    int face1_pos[6][3][3];
-    int face2_pos[6][3][3];
-};
-
-
-struct corner_pieces {
-    char first_side;
-    char second_side;
-    char third_side;
-};
-void search_cube(char A, char B, char C)//寻找特定角块
-{
-
-}
-edge_pieces search_edges(){
-
-}
-
-//Step1  还原底面十字
-void step1(){
-    char colorOftheBottom;
-    colorOftheBottom =cube[5][2][2];
-    
-    search_edge();
-}
-
-//step1 将四个白色棱块转至顶部黄色块周围（回头实现）
-//step2 将四个白色棱块转至底部
-void step2()
-{
-    front_ckw();
-    front_ckw();
-    right_ckw();
-    right_ckw();
-    back_ckw();
-    back_ckw();
-    left_ckw();
-    left_ckw();
-}
-
-
-
-// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
-// 调试程序: F5 或调试 >“开始调试”菜单
-
-// 入门使用技巧: 
-//   1. 使用解决方案资源管理器窗口添加/管理文件
-//   2. 使用团队资源管理器窗口连接到源代码管理
-//   3. 使用输出窗口查看生成输出和其他消息
-//   4. 使用错误列表窗口查看错误
-//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
-//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件
