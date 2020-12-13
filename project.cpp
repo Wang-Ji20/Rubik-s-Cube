@@ -61,10 +61,10 @@ void function_10();
 //== Functions ==//
 corner_pieces search_corners(corner_pieces corner)//寻找特定角块
 {
-//kkk
 
 
-}wefnasiubwdodvbiow
+
+}
 edge_pieces search_edges(edge_pieces edge){//寻找特定棱块
 
 
