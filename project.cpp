@@ -780,7 +780,7 @@ void step5()  //顶面角
     int cnt = 0;
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
-            if (cube[i][j] == cube[0][1][1])
+            if (cube[0][i][j] == cube[0][1][1])
                 cnt++;
     while (cube[0][0][0] != cube[0][1][1] || cube[0][2][0] != cube[0][1][1] || cube[0][2][0] != cube[0][1][1] || cube[0][2][2] != cube[0][1][1])
     {
