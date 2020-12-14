@@ -727,6 +727,18 @@ void function_1()   //一个用于还原顶面十字的函数
     front_ccw();
 }
 
+void function_2()   //一个用于还原顶面角的函数
+{
+    right_ckw();
+    up_ckw();
+    right_ccw();
+    up_ckw();
+    right_ckw();
+    up_ckw();
+    up_ckw();
+    right_ccw();
+}
+
 
 void step1(){
     char colorOftheBottom;
@@ -763,8 +775,40 @@ void step4() //顶部十字
     }
 }
 
-void step5(){
-
+void step5()  //顶面角
+{
+    int cnt = 0;
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            if (cube[i][j] == cube[0][1][1])
+                cnt++;
+    while (cube[0][0][0] != cube[0][1][1] || cube[0][2][0] != cube[0][1][1] || cube[0][2][0] != cube[0][1][1] || cube[0][2][2] != cube[0][1][1])
+    {
+        if (cnt == 6)
+        {
+            while (cube[0][2][0] != cube[0][1][1])
+            {
+                up_ckw();
+            }
+            function_2();
+        }
+        if (cnt == 7)
+        {
+            while (cube[2][0][0] != cube[0][1][1])
+            {
+                up_ckw();
+            }
+            function_2();
+        }
+        if (cnt == 5)
+        {
+            while (cube[1][0][0] != cube[0][1][1] || cube[1][0][2] != cube[0][1][1])
+            {
+                up_ckw();
+            }
+            function_2();
+        }
+    }
 }
 
 void step6(){
