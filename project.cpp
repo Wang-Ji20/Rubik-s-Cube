@@ -744,7 +744,7 @@ void step1(){
     char colorOftheBottom;
     colorOftheBottom =cube[5][2][2];
     
-    search_edges();
+    //search_edges();
 }
 
 
@@ -777,13 +777,13 @@ void step4() //顶部十字
 
 void step5()  //顶面角
 {
-    int cnt = 0;
-    for (int i = 0; i < 3; i++)
-        for (int j = 0; j < 3; j++)
-            if (cube[0][i][j] == cube[0][1][1])
-                cnt++;
     while (cube[0][0][0] != cube[0][1][1] || cube[0][2][0] != cube[0][1][1] || cube[0][2][0] != cube[0][1][1] || cube[0][2][2] != cube[0][1][1])
     {
+        int cnt = 0;
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
+                if (cube[0][i][j] == cube[0][1][1])
+                    cnt++;
         if (cnt == 6)
         {
             while (cube[0][2][0] != cube[0][1][1])
@@ -830,7 +830,8 @@ int main()
             for (int k = 0; k < 3; k++)
                 cin >> cube[corres[i]][j][k];
     dbg_show();
-    front_ccw();
+    step4();
+    step5();
     dbg_show();
     return 0;
 }
