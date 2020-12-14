@@ -705,7 +705,7 @@ void (*op[12])() = {up_ckw, left_ckw, front_ckw, right_ckw, back_ckw, down_ckw,
 
 /*
 1.还原底部十字
-2.还原底部棱块
+2.还原底部角块
 3.解决中间层
 4.还原顶部十字
 5.还原顶部角块
@@ -717,6 +717,27 @@ void (*op[12])() = {up_ckw, left_ckw, front_ckw, right_ckw, back_ckw, down_ckw,
 
 */
 
+void function_1()   //一个用于还原顶面十字的函数
+{
+    front_ckw();
+    right_ckw();
+    up_ckw();
+    right_ccw();
+    up_ccw();
+    front_ccw();
+}
+
+void function_2()   //一个用于还原顶面角的函数
+{
+    right_ckw();
+    up_ckw();
+    right_ccw();
+    up_ckw();
+    right_ckw();
+    up_ckw();
+    up_ckw();
+    right_ccw();
+}
 
 
 void step1(){
@@ -743,13 +764,51 @@ void step3(){
 
 }
 
-void step4(){
-
-
+void step4() //顶部十字
+{
+    while (!(cube[0][0][1] == cube[0][1][1] && cube[0][1][0] == cube[0][1][1] && cube[0][2][1] == cube[0][1][1] && cube[0][1][2] == cube[0][1][1]))
+    {
+        if (cube[0][1][1] == cube[0][2][1])
+            up_ckw();
+        else
+            function_1();
+    }
 }
 
-void step5(){
-
+void step5()  //顶面角
+{
+    int cnt = 0;
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            if (cube[0][i][j] == cube[0][1][1])
+                cnt++;
+    while (cube[0][0][0] != cube[0][1][1] || cube[0][2][0] != cube[0][1][1] || cube[0][2][0] != cube[0][1][1] || cube[0][2][2] != cube[0][1][1])
+    {
+        if (cnt == 6)
+        {
+            while (cube[0][2][0] != cube[0][1][1])
+            {
+                up_ckw();
+            }
+            function_2();
+        }
+        if (cnt == 7)
+        {
+            while (cube[2][0][0] != cube[0][1][1])
+            {
+                up_ckw();
+            }
+            function_2();
+        }
+        if (cnt == 5)
+        {
+            while (cube[1][0][0] != cube[0][1][1] || cube[1][0][2] != cube[0][1][1])
+            {
+                up_ckw();
+            }
+            function_2();
+        }
+    }
 }
 
 void step6(){
