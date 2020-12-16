@@ -175,11 +175,11 @@ corner_pieces search_corners(corner_pieces corner)//寻找特定角块,
         corner.face2_pos[3][0][2]=1;
         corner.face3_pos[4][0][0]=1;
     }
-   else if(cube[0][2][2]==corner.face1 && cube[3][0][2]==corner.face2 && cube[4][0][0]==corner.face3)
+   else if(cube[0][2][2]==corner.face1 && cube[4][0][0]==corner.face2 && cube[3][0][2]==corner.face3)
     {
         corner.face1_pos[0][2][2]=1;
-        corner.face2_pos[3][0][2]=1;
-        corner.face3_pos[4][0][0]=1;
+        corner.face2_pos[4][0][0]=1;
+        corner.face3_pos[3][0][2]=1;
     }
     else if(cube[4][0][0]==corner.face1 && cube[0][2][2]==corner.face2 && cube[3][0][2]==corner.face3)
     {
@@ -226,7 +226,7 @@ corner_pieces search_corners(corner_pieces corner)//寻找特定角块,
     else if(cube[4][2][2]==corner.face1 && cube[5][2][2]==corner.face2 && cube[1][2][0]==corner.face3)
     {
         corner.face1_pos[4][2][2]=1;
-        corner.face2_pos[4][0][2]=1;
+        corner.face2_pos[5][2][2]=1;
         corner.face3_pos[1][2][0]=1;
     }
     else if(cube[5][2][2]==corner.face1 && cube[1][2][0]==corner.face2 && cube[4][2][2]==corner.face3)
@@ -319,11 +319,11 @@ corner_pieces search_corners(corner_pieces corner)//寻找特定角块,
         corner.face2_pos[5][0][2]=1;
         corner.face3_pos[4][2][0]=1;
     }
-   else if(cube[3][2][2]==corner.face1 && cube[5][0][2]==corner.face2 && cube[4][2][0]==corner.face3)
+   else if(cube[3][2][2]==corner.face1 && cube[4][2][0]==corner.face2 && cube[5][0][2]==corner.face3)
     {
         corner.face1_pos[3][2][2]=1;
-        corner.face2_pos[5][0][2]=1;
-        corner.face3_pos[4][2][0]=1;
+        corner.face2_pos[4][2][0]=1;
+        corner.face3_pos[5][0][2]=1;
     }
     else if(cube[4][2][0]==corner.face1 && cube[3][2][2]==corner.face2 && cube[5][0][2]==corner.face3)
     {
@@ -379,8 +379,8 @@ else if(cube[0][2][1]==edge.face1 &&cube[3][0][1]==edge.face2)//第三种
 }
 else if(cube[3][0][1]==edge.face1 &&cube[0][2][1]==edge.face2)
 {
-    edge.face1_pos[0][2][1]=1;
-    edge.face2_pos[3][0][1]=1;
+    edge.face1_pos[3][0][1]=1;
+    edge.face2_pos[0][2][1]=1;
 }
  else if(cube[0][1][2]==edge.face1 &&cube[4][0][1]==edge.face2)//第四种
  {
@@ -411,7 +411,7 @@ else if(cube[2][1][0]==edge.face1 &&cube[1][1][2]==edge.face2)
 {
     edge.face1_pos[2][1][0]=1;
     edge.face2_pos[1][1][2]=1;
-}
+}//检查至此
  else if(cube[2][1][2]==edge.face1 &&cube[3][1][0]==edge.face2)//第七种
  {
     edge.face1_pos[2][1][2]=1;
