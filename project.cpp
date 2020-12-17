@@ -743,8 +743,27 @@ void function_2()   //一个用于还原顶面角的函数
 void step1(){
     char colorOftheBottom;
     colorOftheBottom =cube[5][2][2];
-    
-    //search_edges();
+    while(cube[5][0][1]!=colorOftheBottom && cube[5][2][1]!=colorOftheBottom
+    && cube[5][1][1]!=colorOftheBottom && cube[5][2][1]!=colorOftheBottom
+    && cube[1][2][1]!=cube[1][1][1] && cube[2][2][1]!=cube[2][1][1]
+    && cube[3][2][1]!=cube[3][1][1] && cube[4][2][1]!=cube[4][1][1]){
+        if(cube[2][2][1]!=cube[2][1][1] || cube[5][0][1]!=colorOftheBottom){
+            edge_pieces front= {colorOftheBottom,cube[2][1][1],-1,-1};
+            front = search_edges(front);
+        }
+        else if(cube[4][2][1]!=cube[4][1][1] || cube[5][2][1]!=colorOftheBottom){
+            edge_pieces back= {colorOftheBottom,cube[2][1][1],-1,-1};
+            back = search_edges(back);
+        }
+        else if(cube[3][2][1]!=cube[3][1][1] || cube[5][2][0]!=colorOftheBottom){
+            edge_pieces right= {colorOftheBottom,cube[2][1][1],-1,-1};
+            right = search_edges(right);
+        }
+        else if(cube[1][2][1]!=cube[1][1][1] || cube[5][1][0]!=colorOftheBottom){
+            edge_pieces left= {colorOftheBottom,cube[2][1][1],-1,-1};
+            left = search_edges(left);
+        }
+    }
 }
 
 
