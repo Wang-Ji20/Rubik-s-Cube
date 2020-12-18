@@ -1016,7 +1016,6 @@ void step7() //最后还原
     int cnt;
     while (1)
     {
-        dbg_show();
         cnt = 0;
         for (int i = 1; i <= 4; i++)
             if (cube[i][0][1] != cube[i][1][1])
@@ -1029,7 +1028,6 @@ void step7() //最后还原
             up_ccw();
             while (cube[2][0][1] != cube[2][0][0])
                 function_7();
-            dbg_show();
         }
         if (cnt == 4)
             function_7();
