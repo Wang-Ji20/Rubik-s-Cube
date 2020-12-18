@@ -349,131 +349,131 @@ corner_pieces search_corners(corner_pieces corner)//寻找特定角块,
         corner.face2_pos[4][2][0]=1;
         corner.face3_pos[3][2][2]=1;
     }
+    return corner;
 }
 
-edge_pieces search_edges(edge_pieces edge)
+void search_edges(edge_pieces* edge)
 {//寻找特定棱块
- if(cube[0][0][1]==edge.face1 &&cube[1][0][1]==edge.face2)//第一种
- {
-    edge.face1_pos[0][0][1]=1;
-    edge.face2_pos[1][0][1]=1;
- }
- else if(cube[1][0][1]==edge.face1 &&cube[0][0][1]==edge.face2)
-{
-    edge.face1_pos[1][0][1]=1;
-    edge.face2_pos[0][0][1]=1;
-}
-else if(cube[0][1][0]==edge.face1 &&cube[2][0][1]==edge.face2)//第二种
-{
-    edge.face1_pos[0][1][0]=1;
-    edge.face2_pos[2][0][1]=1;
-}
-else if(cube[2][0][1]==edge.face1 &&cube[0][1][0]==edge.face2)
-{
-    edge.face1_pos[2][0][1]=1;
-    edge.face2_pos[0][1][0]=1;
-}
-else if(cube[0][2][1]==edge.face1 &&cube[3][0][1]==edge.face2)//第三种
-{
-    edge.face1_pos[0][2][1]=1;
-    edge.face2_pos[3][0][1]=1;
-}
-else if(cube[3][0][1]==edge.face1 &&cube[0][2][1]==edge.face2)
-{
-    edge.face1_pos[3][0][1]=1;
-    edge.face2_pos[0][2][1]=1;
-}
- else if(cube[0][1][2]==edge.face1 &&cube[4][0][1]==edge.face2)//第四种
- {
-    edge.face1_pos[0][1][2]=1;
-    edge.face2_pos[4][0][1]=1;
- }
- else if(cube[4][0][1]==edge.face1 &&cube[0][1][2]==edge.face2)
-{
-    edge.face1_pos[4][0][1]=1;
-    edge.face2_pos[0][1][2]=1;
-}
-else if(cube[1][1][0]==edge.face1 &&cube[4][1][2]==edge.face2)//第五种
-{
-    edge.face1_pos[1][1][0]=1;
-    edge.face2_pos[4][1][2]=1;
-}
-else if(cube[4][1][2]==edge.face1 &&cube[1][1][0]==edge.face2)
-{
-    edge.face1_pos[4][1][2]=1;
-    edge.face2_pos[1][1][0]=1;
-}
-else if(cube[1][1][2]==edge.face1 &&cube[2][1][0]==edge.face2)//第六种
-{
-    edge.face1_pos[1][1][2]=1;
-    edge.face2_pos[2][1][0]=1;
-}
-else if(cube[2][1][0]==edge.face1 &&cube[1][1][2]==edge.face2)
-{
-    edge.face1_pos[2][1][0]=1;
-    edge.face2_pos[1][1][2]=1;
-}//检查至此
- else if(cube[2][1][2]==edge.face1 &&cube[3][1][0]==edge.face2)//第七种
- {
-    edge.face1_pos[2][1][2]=1;
-    edge.face2_pos[3][1][0]=1;
- }
- else if(cube[3][1][0]==edge.face1 &&cube[2][1][2]==edge.face2)
-{
-    edge.face1_pos[3][1][0]=1;
-    edge.face2_pos[2][1][2]=1;
-}
-else if(cube[3][1][2]==edge.face1 &&cube[4][1][0]==edge.face2)//第八种
-{
-    edge.face1_pos[3][1][2]=1;
-    edge.face2_pos[4][1][0]=1;
-}
-else if(cube[4][1][0]==edge.face1 &&cube[3][1][2]==edge.face2)
-{
-    edge.face1_pos[4][1][0]=1;
-    edge.face2_pos[3][1][2]=1;
-}
-else if(cube[1][2][1]==edge.face1 &&cube[5][2][1]==edge.face2)//第九种
-{
-    edge.face1_pos[1][2][1]=1;
-    edge.face2_pos[5][2][1]=1;
-}
-else if(cube[5][2][1]==edge.face1 &&cube[1][2][1]==edge.face2)
-{
-    edge.face1_pos[5][2][1]=1;
-    edge.face2_pos[1][2][1]=1;
-}
- else if(cube[2][2][1]==edge.face1 &&cube[5][1][0]==edge.face2)//第十种
- {
-    edge.face1_pos[2][2][1]=1;
-    edge.face2_pos[5][1][0]=1;
- }
- else if(cube[5][1][0]==edge.face1 &&cube[2][2][1]==edge.face2)
-{
-    edge.face1_pos[5][1][0]=1;
-    edge.face2_pos[2][2][1]=1;
-}
-else if(cube[3][2][1]==edge.face1 &&cube[5][0][1]==edge.face2)//第十一种
-{
-    edge.face1_pos[3][2][1]=1;
-    edge.face2_pos[5][0][1]=1;
-}
-else if(cube[5][0][1]==edge.face1 &&cube[3][2][1]==edge.face2)
-{
-    edge.face1_pos[5][0][1]=1;
-    edge.face2_pos[3][2][1]=1;
-}
-else if(cube[4][2][1]==edge.face1 &&cube[5][1][2]==edge.face2)//第十二种
-{
-    edge.face1_pos[4][2][1]=1;
-    edge.face2_pos[5][1][2]=1;
-}
-else if(cube[5][1][2]==edge.face1 &&cube[4][2][1]==edge.face2)
-{
-    edge.face1_pos[5][1][2]=1;
-    edge.face2_pos[4][2][1]=1;
-}
-
+    if (cube[0][0][1] == (*edge).face1 && cube[4][0][1] == (*edge).face2)//第一种
+    {
+        (*edge).face1_pos[0][0][1] = 1;
+        (*edge).face2_pos[4][0][1] = 1;
+    }
+    else if (cube[4][0][1] == (*edge).face1 && cube[0][0][1] == (*edge).face2)
+    {
+        (*edge).face1_pos[4][0][1] = 1;
+        (*edge).face2_pos[0][0][1] = 1;
+    }
+    else if (cube[0][1][0] == (*edge).face1 && cube[1][0][1] == (*edge).face2)//第二种
+    {
+        (*edge).face1_pos[0][1][0] = 1;
+        (*edge).face2_pos[1][0][1] = 1;
+    }
+    else if (cube[1][0][1] == (*edge).face1 && cube[0][1][0] == (*edge).face2)
+    {
+        (*edge).face1_pos[1][0][1] = 1;
+        (*edge).face2_pos[0][1][0] = 1;
+    }
+    else if (cube[0][2][1] == (*edge).face1 && cube[2][0][1] == (*edge).face2)//第三种
+    {
+        (*edge).face1_pos[0][2][1] = 1;
+        (*edge).face2_pos[2][0][1] = 1;
+    }
+    else if (cube[2][0][1] == (*edge).face1 && cube[0][2][1] == (*edge).face2)
+    {
+        (*edge).face1_pos[2][0][1] = 1;
+        (*edge).face2_pos[0][2][1] = 1;
+    }
+    else if (cube[0][1][2] == (*edge).face1 && cube[3][0][1] == (*edge).face2)//第四种
+    {
+        (*edge).face1_pos[0][1][2] = 1;
+        (*edge).face2_pos[3][0][1] = 1;
+    }
+    else if (cube[3][0][1] == (*edge).face1 && cube[0][1][2] == (*edge).face2)
+    {
+        (*edge).face1_pos[3][0][1] = 1;
+        (*edge).face2_pos[0][1][2] = 1;
+    }
+    else if (cube[1][1][0] == (*edge).face1 && cube[4][1][2] == (*edge).face2)//第五种
+    {
+        (*edge).face1_pos[1][1][0] = 1;
+        (*edge).face2_pos[4][1][2] = 1;
+    }
+    else if (cube[4][1][2] == (*edge).face1 && cube[1][1][0] == (*edge).face2)
+    {
+        (*edge).face1_pos[4][1][2] = 1;
+        (*edge).face2_pos[1][1][0] = 1;
+    }
+    else if (cube[1][1][2] == (*edge).face1 && cube[2][1][0] == (*edge).face2)//第六种
+    {
+        (*edge).face1_pos[1][1][2] = 1;
+        (*edge).face2_pos[2][1][0] = 1;
+    }
+    else if (cube[2][1][0] == (*edge).face1 && cube[1][1][2] == (*edge).face2)
+    {
+        (*edge).face1_pos[2][1][0] = 1;
+        (*edge).face2_pos[1][1][2] = 1;
+    }//检查至此
+    else if (cube[2][1][2] == (*edge).face1 && cube[3][1][0] == (*edge).face2)//第七种
+    {
+        (*edge).face1_pos[2][1][2] = 1;
+        (*edge).face2_pos[3][1][0] = 1;
+    }
+    else if (cube[3][1][0] == (*edge).face1 && cube[2][1][2] == (*edge).face2)
+    {
+        (*edge).face1_pos[3][1][0] = 1;
+        (*edge).face2_pos[2][1][2] = 1;
+    }
+    else if (cube[3][1][2] == (*edge).face1 && cube[4][1][0] == (*edge).face2)//第八种
+    {
+        (*edge).face1_pos[3][1][2] = 1;
+        (*edge).face2_pos[4][1][0] = 1;
+    }
+    else if (cube[4][1][0] == (*edge).face1 && cube[3][1][2] == (*edge).face2)
+    {
+        (*edge).face1_pos[4][1][0] = 1;
+        (*edge).face2_pos[3][1][2] = 1;
+    }
+    else if (cube[1][2][1] == (*edge).face1 && cube[5][1][0] == (*edge).face2)//第九种
+    {
+        (*edge).face1_pos[1][2][1] = 1;
+        (*edge).face2_pos[5][1][0] = 1;
+    }
+    else if (cube[5][1][0] == (*edge).face1 && cube[1][2][1] == (*edge).face2)
+    {
+        (*edge).face1_pos[5][1][0] = 1;
+        (*edge).face2_pos[1][2][1] = 1;
+    }
+    else if (cube[2][2][1] == (*edge).face1 && cube[5][0][1] == (*edge).face2)//第十种
+    {
+        (*edge).face1_pos[2][2][1] = 1;
+        (*edge).face2_pos[5][0][1] = 1;
+    }
+    else if (cube[5][0][1] == (*edge).face1 && cube[2][2][1] == (*edge).face2)
+    {
+        (*edge).face1_pos[5][0][1] = 1;
+        (*edge).face2_pos[2][2][1] = 1;
+    }
+    else if (cube[3][2][1] == (*edge).face1 && cube[5][1][2] == (*edge).face2)//第十一种
+    {
+    (*edge).face1_pos[3][2][1] = 1;
+    (*edge).face2_pos[5][1][2] = 1;
+    }
+    else if (cube[5][1][2] == (*edge).face1 && cube[3][2][1] == (*edge).face2)
+    {
+    (*edge).face1_pos[5][1][2] = 1;
+    (*edge).face2_pos[3][2][1] = 1;
+    }
+    else if (cube[4][2][1] == (*edge).face1 && cube[5][2][1] == (*edge).face2)//第十二种
+    {
+        (*edge).face1_pos[4][2][1] = 1;
+        (*edge).face2_pos[5][2][1] = 1;
+    }
+    else if (cube[5][2][1] == (*edge).face1 && cube[4][2][1] == (*edge).face2)
+    {
+    (*edge).face1_pos[5][2][1] = 1;
+    (*edge).face2_pos[4][2][1] = 1;
+    }
 }
 
 
@@ -740,65 +740,65 @@ void function_2()   //一个用于还原顶面角的函数
     right_ccw();
 }
 
-void function_3_1()//see from left(公式2)
+void function_3_1()//see from left(公式2)//ok
 {
-    front_ccw; up_ccw; up_ccw; front_ckw; up_ccw; front_ccw; up_ccw; up_ccw;
-    front_ckw; up_ccw; left_ckw; up_ckw; left_ccw;
+    front_ckw(); up_ckw(); up_ckw(); front_ccw(); up_ckw(); front_ckw(); up_ckw(); up_ckw();
+    front_ccw(); up_ckw(); left_ccw(); up_ccw(); left_ckw();
 }
-void function_3_2()//see from front
+void function_3_2()//see from front//ok
 {
-    right_ccw; up_ccw; up_ccw; right_ckw; up_ccw; right_ccw; up_ccw; up_ccw;
-    right_ckw; up_ccw; front_ckw; up_ckw; front_ccw;
+    right_ckw(); up_ckw(); up_ckw(); right_ccw(); up_ckw(); right_ckw(); up_ckw(); up_ckw();
+    right_ccw(); up_ckw(); front_ccw(); up_ccw(); front_ckw();
 }
-void function_3_3()//see from right
+void function_3_3()//see from right\\ok
 {
-    back_ccw; up_ccw; up_ccw; back_ckw; up_ccw; back_ccw; up_ccw; up_ccw;
-    back_ckw; up_ccw; right_ckw; up_ckw; right_ccw;
+    back_ckw(); up_ckw(); up_ckw(); back_ccw(); up_ckw(); back_ckw(); up_ckw(); up_ckw();
+    back_ccw(); up_ckw(); right_ccw(); up_ccw(); right_ckw();
 }
-void function_3_4()//see from back
+void function_3_4()//see from back//ok
 {
-    left_ccw; up_ccw; up_ccw; left_ckw; up_ccw; left_ccw; up_ccw; up_ccw;
-    left_ckw; up_ccw; back_ckw; up_ckw;back_ccw;
+    left_ckw(); up_ckw(); up_ckw(); left_ccw(); up_ckw(); left_ckw(); up_ckw(); up_ckw();
+    left_ccw(); up_ckw(); back_ccw(); up_ccw(); back_ckw();
 }
-void function_4_1()//see from left(公式3)
+void function_4_1()//see from left(公式3)//ok
 {
-    up_ccw; front_ccw; up_ckw; front_ckw; 
-    up_ckw; left_ckw; up_ccw; left_ccw;
+    up_ckw(); front_ckw(); up_ccw(); front_ccw();
+    up_ccw(); left_ccw(); up_ckw(); left_ckw();
 }
-void function_4_2()//see from front
+void function_4_2()//see from front//ok
 {
-    up_ccw; right_ccw; up_ckw; right_ckw; 
-    up_ckw; front_ckw; up_ccw; front_ccw;
+    up_ckw(); right_ckw(); up_ccw(); right_ccw();
+    up_ccw(); front_ccw(); up_ckw(); front_ckw();
 }
-void function_4_3()//see from right
+void function_4_3()//see from right\\ok
 {
-    up_ccw; back_ccw; up_ckw; back_ckw; 
-    up_ckw; right_ckw; up_ccw; right_ccw;
+    up_ckw(); back_ckw(); up_ccw(); back_ccw();
+    up_ccw(); right_ccw(); up_ckw(); right_ckw();
 }
-void function_4_4()//see from back
+void function_4_4()//see from back//ok
 {
-    up_ccw; left_ccw; up_ckw; left_ckw; 
-    up_ckw; back_ckw; up_ccw; back_ccw;
+    up_ckw(); left_ckw(); up_ccw(); left_ccw();
+    up_ccw(); back_ccw(); up_ckw(); back_ckw();
 }
-void function_5_1()//see from left(公式4)
+void function_5_1()//see from left(公式4)//其余函数ccw与ckw均需修改
 {
-    front_ckw; up_ckw; front_ckw; up_ckw; front_ckw;
-    up_ccw; front_ccw; up_ccw; front_ccw;
+    front_ccw();   up_ccw();   front_ccw();   up_ccw();    front_ccw();  
+    up_ckw();   front_ckw();   up_ckw();   front_ckw();
 }
-void function_5_2()//see from front
+void function_5_2()//see from front\\ok
 {
-    right_ckw; up_ckw; right_ckw; up_ckw; right_ckw;
-    up_ccw; right_ccw; up_ccw; right_ccw;
+    right_ccw(); up_ccw(); right_ccw(); up_ccw(); right_ccw();
+    up_ckw(); right_ckw(); up_ckw(); right_ckw();
 }
-void function_5_3()//see from right
+void function_5_3()//see from right//ok
 {
-    back_ckw; up_ckw; back_ckw; up_ckw; back_ckw;
-    up_ccw; back_ccw; up_ccw; back_ccw;
+    back_ccw(); up_ccw(); back_ccw(); up_ccw(); back_ccw();
+    up_ckw(); back_ckw(); up_ckw(); back_ckw();
 }
-void function_5_4()//see from back
+void function_5_4()//see from back\\ok
 {
-    left_ckw; up_ckw; left_ckw; up_ckw; left_ckw;
-    up_ccw; left_ccw; up_ccw; left_ccw;
+    left_ccw(); up_ccw(); left_ccw(); up_ccw(); left_ccw();
+    up_ckw(); left_ckw(); up_ckw(); left_ckw();
 }
 
 
@@ -811,19 +811,19 @@ void step1(){
     && cube[3][2][1]!=cube[3][1][1] && cube[4][2][1]!=cube[4][1][1]){
         if(cube[2][2][1]!=cube[2][1][1] || cube[5][0][1]!=colorOftheBottom){
             edge_pieces front= {colorOftheBottom,cube[2][1][1],-1,-1};
-            front = search_edges(front);
+            search_edges(&front);
         }
         else if(cube[4][2][1]!=cube[4][1][1] || cube[5][2][1]!=colorOftheBottom){
             edge_pieces back= {colorOftheBottom,cube[2][1][1],-1,-1};
-            back = search_edges(back);
+            search_edges(&back);
         }
         else if(cube[3][2][1]!=cube[3][1][1] || cube[5][2][0]!=colorOftheBottom){
             edge_pieces right= {colorOftheBottom,cube[2][1][1],-1,-1};
-            right = search_edges(right);
+            search_edges(&right);
         }
         else if(cube[1][2][1]!=cube[1][1][1] || cube[5][1][0]!=colorOftheBottom){
             edge_pieces left= {colorOftheBottom,cube[2][1][1],-1,-1};
-            left = search_edges(left);
+            search_edges(&left);
         }
     }
 }
@@ -841,69 +841,76 @@ void step2()
     left_ckw();
 }
 
-void step3(char a,char b,char c,char d,char e,char f)//  还原中间棱块 ,将6个面中心块具体颜色输入                                                   
+void step3(char a, char b, char c, char d, char e, char f)//  还原中间棱块 ,将6个面中心块具体颜色输入                                                   
 {
-    edge_pieces A={b,c,{{{0}}},{{{0}}}};//先写一种，其余同理
-    edge_pieces B={c,d,{{{0}}},{{{0}}}};
-    edge_pieces C={d,e,{{{0}}},{{{0}}}};
-    edge_pieces D={e,a,{{{0}}},{{{0}}}};
-    search_edges(A);
-    if(A.face1_pos[2][1][0]==1 &&A.face2_pos[1][1][2]==1)
-    function_3_1();
-    else 
+    edge_pieces A = { b,c,{{{0}}},{{{0}}} };//先写一种，其余同理
+    edge_pieces B = { c,d,{{{0}}},{{{0}}} };
+    edge_pieces C = { d,e,{{{0}}},{{{0}}} };
+    edge_pieces D = { e,b,{{{0}}},{{{0}}} };
+    search_edges(&A);
+    if (A.face1_pos[2][1][0] == 1 && A.face2_pos[1][1][2] == 1)
+        function_3_1();
+    else if(!(A.face2_pos[2][1][0] == 1 && A.face1_pos[1][1][2] == 1))
     {
-        while(!((A.face1_pos[1][0][1]==1 &&A.face2_pos[0][1][0]==1) ||(A.face1_pos[0][2][1]==1 &&A.face2_pos[2][0][1]==1)))
+        while (!((A.face1_pos[1][0][1] == 1 && A.face2_pos[0][1][0] == 1) || (A.face1_pos[0][2][1] == 1 && A.face2_pos[2][0][1] == 1)))
         {
-            up_ckw() ;
+            up_ckw();
+            search_edges(&A);
         }
-        if(A.face1_pos[1][0][1]==1 &&A.face2_pos[0][1][0]==1)
-        function_4_1;
-        else if(A.face1_pos[0][2][1]==1 &&A.face2_pos[2][0][1]==1)
-        function_5_1;
+        if (A.face1_pos[1][0][1] == 1 && A.face2_pos[0][1][0] == 1)
+            function_4_1();
+        else if (A.face1_pos[0][2][1] == 1 && A.face2_pos[2][0][1] == 1)
+            function_5_1();
     }
-    search_edges(B);
-    if(B.face1_pos[3][1][0]==1 &&B.face2_pos[2][1][2]==1)
-    function_3_2();
-    else 
+    dbg_show();
+    search_edges(&B);
+    if (B.face1_pos[3][1][0] == 1 && B.face2_pos[2][1][2] == 1)
+        function_3_2();
+    else if(!(B.face2_pos[3][1][0] == 1 && B.face1_pos[2][1][2] == 1))
     {
-        while(!((B.face1_pos[2][0][1]==1 &&B.face2_pos[0][2][1]==1) ||(B.face1_pos[0][1][2]==1 &&B.face2_pos[3][0][1]==1)))
+        while (!((B.face1_pos[2][0][1] == 1 && B.face2_pos[0][2][1] == 1) || (B.face1_pos[0][1][2] == 1 && B.face2_pos[3][0][1] == 1)))
         {
-            up_ckw() ;
+            up_ckw();
+            search_edges(&B);
         }
-        if(B.face1_pos[2][0][1]==1 &&B.face2_pos[0][2][1]==1)
-        function_4_2;
-        else if(B.face1_pos[0][1][2]==1 &&B.face2_pos[3][0][1]==1)
-        function_5_2;
+        if (B.face1_pos[2][0][1] == 1 && B.face2_pos[0][2][1] == 1)
+            function_4_2();
+        else if (B.face1_pos[0][1][2] == 1 && B.face2_pos[3][0][1] == 1)
+            function_5_2();
     }
-    search_edges(C);
-    if(C.face1_pos[4][1][0]==1 &&C.face2_pos[3][1][2]==1)
-    function_3_3();
-    else 
+    dbg_show();
+    search_edges(&C);
+    if (C.face1_pos[4][1][0] == 1 && C.face2_pos[3][1][2] == 1)
+        function_3_3();
+    else if(!(C.face2_pos[4][1][0] == 1 && C.face1_pos[3][1][2] == 1))
     {
-        while(!((C.face1_pos[3][0][1]==1 &&C.face2_pos[0][1][2]==1) ||(C.face1_pos[0][0][1]==1 &&C.face2_pos[4][0][1]==1)))
+        while (!((C.face1_pos[3][0][1] == 1 && C.face2_pos[0][1][2] == 1) || (C.face1_pos[0][0][1] == 1 && C.face2_pos[4][0][1] == 1)))
         {
-            up_ckw() ;
+            up_ckw();
+            search_edges(&C);
         }
-        if(C.face1_pos[3][0][1]==1 &&C.face2_pos[0][1][2]==1)
-        function_4_3();
-        else if(C.face1_pos[0][0][1]==1 &&C.face2_pos[4][0][1]==1)
-        function_5_3();
+        if (C.face1_pos[3][0][1] == 1 && C.face2_pos[0][1][2] == 1)
+            function_4_3();
+        else if (C.face1_pos[0][0][1] == 1 && C.face2_pos[4][0][1] == 1)
+            function_5_3();
     }
-    search_edges(D);
-    if(D.face1_pos[1][1][0]==1 &&D.face2_pos[4][1][2]==1)
-    function_3_4();
-    else 
+    dbg_show();
+    search_edges(&D);
+    if (D.face1_pos[1][1][0] == 1 && D.face2_pos[4][1][2] == 1)
+        function_3_4();
+    else if(!(D.face2_pos[1][1][0] == 1 && D.face1_pos[4][1][2] == 1))
     {
-        while(!((D.face1_pos[4][0][1]==1 &&D.face2_pos[0][0][1]==1) ||(D.face1_pos[0][1][0]==1 &&D.face2_pos[1][0][1]==1)))
+        while (!((D.face1_pos[4][0][1] == 1 && D.face2_pos[0][0][1] == 1) || (D.face1_pos[0][1][0] == 1 && D.face2_pos[1][0][1] == 1)))
         {
-            up_ckw() ;
+            up_ckw();
+            search_edges(&D);
         }
-        if(D.face1_pos[4][0][1]==1 &&D.face2_pos[0][0][1]==1)
-        function_4_4();
-        else if(D.face1_pos[0][1][0]==1 &&D.face2_pos[1][0][1]==1)
-        function_5_4();
+        if (D.face1_pos[4][0][1] == 1 && D.face2_pos[0][0][1] == 1)
+            function_4_4();
+        else if (D.face1_pos[0][1][0] == 1 && D.face2_pos[1][0][1] == 1)
+            function_5_4();
     }
-
+    dbg_show();
 }
 
 void step4() //顶部十字
@@ -971,7 +978,7 @@ int main()
         for (int j = 0; j < 3; j++)
             for (int k = 0; k < 3; k++)
                 cin >> cube[corres[i]][j][k];
-    char A=cube[0][0][0],B=cube[1][0][0],C=cube[2][0][0],D=cube[3][0][0],E=cube[4][0][0],F=cube[5][0][0];//指示6个面中心面块颜色
+    char A=cube[0][1][1],B=cube[1][1][1],C=cube[2][1][1],D=cube[3][1][1],E=cube[4][1][1],F=cube[5][1][1];//指示6个面中心面块颜色
     dbg_show();
     step4();
     step5();
