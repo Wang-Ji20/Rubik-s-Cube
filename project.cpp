@@ -59,297 +59,296 @@ void function_9();
 void function_10();
 //== Functions ==//
 
-corner_pieces search_corners(corner_pieces corner)//寻找特定角块,
+void search_corners(corner_pieces* corner)//寻找特定角块,
 {//每个块的顺序：abc,acb,bac,bca,cab,cba
-    if(cube[0][0][2]==corner.face1 && cube[1][0][0]==corner.face2 && cube[4][0][2]==corner.face3)//第一大种
+    if (cube[0][0][2] == (*corner).face1 && cube[4][0][0] == (*corner).face2 && cube[3][0][2] == (*corner).face3)//第一大种
     {
-        corner.face1_pos[0][0][2]=1;
-        corner.face2_pos[1][0][0]=1;
-        corner.face3_pos[4][0][2]=1;
+        (*corner).face1_pos[0][0][2] = 1;
+        (*corner).face2_pos[4][0][0] = 1;
+        (*corner).face3_pos[3][0][2] = 1;
     }
-    else if(cube[0][0][2]==corner.face1 && cube[4][0][2]==corner.face2 && cube[1][0][0]==corner.face3)
+    else if (cube[0][0][2] == (*corner).face1 && cube[3][0][2] == (*corner).face2 && cube[4][0][0] == (*corner).face3)
     {
-        corner.face1_pos[0][0][2]=1;
-        corner.face2_pos[4][0][2]=1;
-        corner.face3_pos[1][0][0]=1;
+        (*corner).face1_pos[0][0][2] = 1;
+        (*corner).face2_pos[3][0][2] = 1;
+        (*corner).face3_pos[4][0][0] = 1;
     }
-    else if(cube[1][0][0]==corner.face1 && cube[0][0][2]==corner.face2 && cube[4][0][2]==corner.face3)
+    else if (cube[4][0][0] == (*corner).face1 && cube[0][0][2] == (*corner).face2 && cube[3][0][2] == (*corner).face3)
     {
-        corner.face1_pos[1][0][0]=1;
-        corner.face2_pos[0][0][2]=1;
-        corner.face3_pos[4][0][2]=1;
+        (*corner).face1_pos[4][0][0] = 1;
+        (*corner).face2_pos[0][0][2] = 1;
+        (*corner).face3_pos[3][0][2] = 1;
     }
-    else if(cube[1][0][0]==corner.face1 && cube[4][0][2]==corner.face2 && cube[0][0][2]==corner.face3)
+    else if (cube[4][0][0] == (*corner).face1 && cube[3][0][2] == (*corner).face2 && cube[0][0][2] == (*corner).face3)
     {
-        corner.face1_pos[1][0][0]=1;
-        corner.face2_pos[4][0][2]=1;
-        corner.face3_pos[0][0][2]=1;
+        (*corner).face1_pos[4][0][0] = 1;
+        (*corner).face2_pos[3][0][2] = 1;
+        (*corner).face3_pos[0][0][2] = 1;
     }
-    else if(cube[4][0][2]==corner.face1 && cube[0][0][2]==corner.face2 && cube[1][0][0]==corner.face3)
+    else if (cube[3][0][2] == (*corner).face1 && cube[0][0][2] == (*corner).face2 && cube[4][0][0] == (*corner).face3)
     {
-        corner.face1_pos[4][0][2]=1;
-        corner.face2_pos[0][0][2]=1;
-        corner.face3_pos[1][0][0]=1;
+        (*corner).face1_pos[3][0][2] = 1;
+        (*corner).face2_pos[0][0][2] = 1;
+        (*corner).face3_pos[4][0][0] = 1;
     }
-    else if(cube[4][0][2]==corner.face1 && cube[1][0][0]==corner.face2 && cube[0][0][2]==corner.face3)
+    else if (cube[3][0][2] == (*corner).face1 && cube[4][0][0] == (*corner).face2 && cube[0][0][2] == (*corner).face3)
     {
-        corner.face1_pos[4][0][2]=1;
-        corner.face2_pos[1][0][0]=1;
-        corner.face3_pos[0][0][2]=1;
+        (*corner).face1_pos[3][0][2] = 1;
+        (*corner).face2_pos[4][0][0] = 1;
+        (*corner).face3_pos[0][0][2] = 1;
     }
-    else if(cube[0][0][0]==corner.face1 && cube[1][0][2]==corner.face2 && cube[2][0][0]==corner.face3)//第二大种
+    else if (cube[0][0][0] == (*corner).face1 && cube[4][0][2] == (*corner).face2 && cube[1][0][0] == (*corner).face3)//第二大种
     {
-        corner.face1_pos[0][0][0]=1;
-        corner.face2_pos[1][0][2]=1;
-        corner.face3_pos[2][0][0]=1;
+        (*corner).face1_pos[0][0][0] = 1;
+        (*corner).face2_pos[4][0][2] = 1;
+        (*corner).face3_pos[1][0][0] = 1;
     }
-        else if(cube[0][0][0]==corner.face1 && cube[2][0][0]==corner.face2 && cube[1][0][2]==corner.face3)
+    else if (cube[0][0][0] == (*corner).face1 && cube[1][0][0] == (*corner).face2 && cube[4][0][2] == (*corner).face3)
     {
-        corner.face1_pos[0][0][0]=1;
-        corner.face2_pos[2][0][0]=1;
-        corner.face3_pos[1][0][2]=1;
+        (*corner).face1_pos[0][0][0] = 1;
+        (*corner).face2_pos[1][0][0] = 1;
+        (*corner).face3_pos[4][0][2] = 1;
     }
-    else if(cube[1][0][2]==corner.face1 && cube[0][0][0]==corner.face2 && cube[2][0][0]==corner.face3)
+    else if (cube[4][0][2] == (*corner).face1 && cube[0][0][0] == (*corner).face2 && cube[1][0][0] == (*corner).face3)
     {
-        corner.face1_pos[1][0][2]=1;
-        corner.face2_pos[0][0][0]=1;
-        corner.face3_pos[2][0][0]=1;
+        (*corner).face1_pos[4][0][2] = 1;
+        (*corner).face2_pos[0][0][0] = 1;
+        (*corner).face3_pos[1][0][0] = 1;
     }
-    else if(cube[1][0][2]==corner.face1 && cube[2][0][0]==corner.face2 && cube[0][0][0]==corner.face3)
+    else if (cube[4][0][2] == (*corner).face1 && cube[1][0][0] == (*corner).face2 && cube[0][0][0] == (*corner).face3)
     {
-        corner.face1_pos[1][0][2]=1;
-        corner.face2_pos[2][0][0]=1;
-        corner.face3_pos[0][0][0]=1;
+        (*corner).face1_pos[4][0][2] = 1;
+        (*corner).face2_pos[1][0][0] = 1;
+        (*corner).face3_pos[0][0][0] = 1;
     }
-    else if(cube[2][0][0]==corner.face1 && cube[0][0][0]==corner.face2 && cube[1][0][2]==corner.face3)
+    else if (cube[1][0][0] == (*corner).face1 && cube[0][0][0] == (*corner).face2 && cube[4][0][2] == (*corner).face3)
     {
-        corner.face1_pos[2][0][0]=1;
-        corner.face2_pos[0][0][0]=1;
-        corner.face3_pos[1][0][0]=1;
+        (*corner).face1_pos[1][0][0] = 1;
+        (*corner).face2_pos[0][0][0] = 1;
+        (*corner).face3_pos[4][0][2] = 1;
     }
-    else if(cube[2][0][0]==corner.face1 && cube[1][0][2]==corner.face2 && cube[0][0][0]==corner.face3)
+    else if (cube[1][0][0] == (*corner).face1 && cube[4][0][2] == (*corner).face2 && cube[0][0][0] == (*corner).face3)
     {
-        corner.face1_pos[2][0][0]=1;
-        corner.face2_pos[1][0][2]=1;
-        corner.face3_pos[0][0][0]=1;
+        (*corner).face1_pos[1][0][0] = 1;
+        (*corner).face2_pos[4][0][2] = 1;
+        (*corner).face3_pos[0][0][0] = 1;
     }
-    else if(cube[0][2][0]==corner.face1 && cube[2][0][2]==corner.face2 && cube[3][0][0]==corner.face3)//第三大种002、100、402
+    else if (cube[0][2][0] == (*corner).face1 && cube[1][0][2] == (*corner).face2 && cube[2][0][0] == (*corner).face3)//第三大种002、100、402
     {
-        corner.face1_pos[0][2][0]=1;
-        corner.face2_pos[2][0][2]=1;
-        corner.face3_pos[3][0][0]=1;
+        (*corner).face1_pos[0][2][0] = 1;
+        (*corner).face2_pos[1][0][2] = 1;
+        (*corner).face3_pos[2][0][0] = 1;
     }
-       else if(cube[0][2][0]==corner.face1 && cube[3][0][0]==corner.face2 && cube[2][0][2]==corner.face3)
+    else if (cube[0][2][0] == (*corner).face1 && cube[2][0][0] == (*corner).face2 && cube[1][0][2] == (*corner).face3)
     {
-        corner.face1_pos[0][2][0]=1;
-        corner.face2_pos[3][0][0]=1;
-        corner.face3_pos[2][0][2]=1;
+        (*corner).face1_pos[0][2][0] = 1;
+        (*corner).face2_pos[2][0][0] = 1;
+        (*corner).face3_pos[1][0][2] = 1;
     }
-    else if(cube[2][0][2]==corner.face1 && cube[0][2][0]==corner.face2 && cube[3][0][0]==corner.face3)
+    else if (cube[1][0][2] == (*corner).face1 && cube[0][2][0] == (*corner).face2 && cube[2][0][0] == (*corner).face3)
     {
-        corner.face1_pos[2][0][2]=1;
-        corner.face2_pos[0][2][0]=1;
-        corner.face3_pos[3][0][0]=1;
+        (*corner).face1_pos[1][0][2] = 1;
+        (*corner).face2_pos[0][2][0] = 1;
+        (*corner).face3_pos[2][0][0] = 1;
     }
-    else if(cube[2][0][2]==corner.face1 && cube[3][0][0]==corner.face2 && cube[0][2][0]==corner.face3)
+    else if (cube[1][0][2] == (*corner).face1 && cube[2][0][0] == (*corner).face2 && cube[0][2][0] == (*corner).face3)
     {
-        corner.face1_pos[2][0][2]=1;
-        corner.face2_pos[3][0][0]=1;
-        corner.face3_pos[0][2][0]=1;
+        (*corner).face1_pos[1][0][2] = 1;
+        (*corner).face2_pos[2][0][0] = 1;
+        (*corner).face3_pos[0][2][0] = 1;
     }
-    else if(cube[3][0][0]==corner.face1 && cube[0][2][0]==corner.face2 && cube[2][0][2]==corner.face3)
+    else if (cube[2][0][0] == (*corner).face1 && cube[0][2][0] == (*corner).face2 && cube[1][0][2] == (*corner).face3)
     {
-        corner.face1_pos[3][0][0]=1;
-        corner.face2_pos[0][2][0]=1;
-        corner.face3_pos[2][0][2]=1;
+        (*corner).face1_pos[2][0][0] = 1;
+        (*corner).face2_pos[0][2][0] = 1;
+        (*corner).face3_pos[1][0][2] = 1;
     }
-    else if(cube[3][0][0]==corner.face1 && cube[2][0][2]==corner.face2 && cube[0][2][0]==corner.face3)
+    else if (cube[2][0][0] == (*corner).face1 && cube[1][0][2] == (*corner).face2 && cube[0][2][0] == (*corner).face3)
     {
-        corner.face1_pos[3][0][0]=1;
-        corner.face2_pos[2][0][2]=1;
-        corner.face3_pos[0][2][0]=1;
+    (*corner).face1_pos[2][0][0] = 1;
+        (*corner).face2_pos[1][0][2] = 1;
+        (*corner).face3_pos[0][2][0] = 1;
     }
-    else if(cube[0][2][2]==corner.face1 && cube[3][0][2]==corner.face2 && cube[4][0][0]==corner.face3)//第四大种
+    else if (cube[0][2][2] == (*corner).face1 && cube[2][0][2] == (*corner).face2 && cube[3][0][0] == (*corner).face3)//第四大种
     {
-        corner.face1_pos[0][2][2]=1;
-        corner.face2_pos[3][0][2]=1;
-        corner.face3_pos[4][0][0]=1;
+    (*corner).face1_pos[0][2][2] = 1;
+        (*corner).face2_pos[2][0][2] = 1;
+        (*corner).face3_pos[3][0][0] = 1;
     }
-   else if(cube[0][2][2]==corner.face1 && cube[4][0][0]==corner.face2 && cube[3][0][2]==corner.face3)
+    else if (cube[0][2][2] == (*corner).face1 && cube[3][0][0] == (*corner).face2 && cube[2][0][2] == (*corner).face3)
     {
-        corner.face1_pos[0][2][2]=1;
-        corner.face2_pos[4][0][0]=1;
-        corner.face3_pos[3][0][2]=1;
+    (*corner).face1_pos[0][2][2] = 1;
+    (*corner).face2_pos[3][0][0] = 1;
+    (*corner).face3_pos[2][0][2] = 1;
     }
-    else if(cube[4][0][0]==corner.face1 && cube[0][2][2]==corner.face2 && cube[3][0][2]==corner.face3)
+    else if (cube[3][0][0] == (*corner).face1 && cube[0][2][2] == (*corner).face2 && cube[2][0][2] == (*corner).face3)
     {
-        corner.face1_pos[4][0][0]=1;
-        corner.face2_pos[0][2][2]=1;
-        corner.face3_pos[3][0][2]=1;
+    (*corner).face1_pos[3][0][0] = 1;
+    (*corner).face2_pos[0][2][2] = 1;
+    (*corner).face3_pos[2][0][2] = 1;
     }
-    else if(cube[4][0][0]==corner.face1 && cube[3][0][2]==corner.face2 && cube[0][2][2]==corner.face3)
+    else if (cube[3][0][0] == (*corner).face1 && cube[2][0][2] == (*corner).face2 && cube[0][2][2] == (*corner).face3)
     {
-        corner.face1_pos[4][0][0]=1;
-        corner.face2_pos[3][0][2]=1;
-        corner.face3_pos[0][2][2]=1;
+    (*corner).face1_pos[3][0][0] = 1;
+    (*corner).face2_pos[2][0][2] = 1;
+        (*corner).face3_pos[0][2][2] = 1;
     }
-    else if(cube[3][0][2]==corner.face1 && cube[0][2][2]==corner.face2 && cube[4][0][0]==corner.face3)
+    else if (cube[2][0][2] == (*corner).face1 && cube[0][2][2] == (*corner).face2 && cube[3][0][0] == (*corner).face3)
     {
-        corner.face1_pos[3][0][2]=1;
-        corner.face2_pos[0][2][2]=1;
-        corner.face3_pos[4][0][0]=1;
+    (*corner).face1_pos[2][0][2] = 1;
+    (*corner).face2_pos[0][2][2] = 1;
+    (*corner).face3_pos[3][0][0] = 1;
     }
-    else if(cube[3][0][2]==corner.face1 && cube[4][0][0]==corner.face2 && cube[0][2][2]==corner.face3)
+    else if (cube[2][0][2] == (*corner).face1 && cube[3][0][0] == (*corner).face2 && cube[0][2][2] == (*corner).face3)
     {
-        corner.face1_pos[3][0][2]=1;
-        corner.face2_pos[4][0][0]=1;
-        corner.face3_pos[0][2][2]=1;
+        (*corner).face1_pos[2][0][2] = 1;
+        (*corner).face2_pos[3][0][0] = 1;
+        (*corner).face3_pos[0][2][2] = 1;
     }
-    else if(cube[1][2][0]==corner.face1 && cube[4][2][2]==corner.face2 && cube[5][2][2]==corner.face3)//第五大种
+    else if (cube[1][2][0] == (*corner).face1 && cube[4][2][2] == (*corner).face2 && cube[5][2][0] == (*corner).face3)//第五大种
     {
-        corner.face1_pos[1][2][0]=1;
-        corner.face2_pos[4][2][2]=1;
-        corner.face3_pos[5][2][2]=1;
+        (*corner).face1_pos[1][2][0] = 1;
+        (*corner).face2_pos[4][2][2] = 1;
+        (*corner).face3_pos[5][2][0] = 1;
     }
-    else if(cube[1][2][0]==corner.face1 && cube[5][2][2]==corner.face2 && cube[4][2][2]==corner.face3)
+    else if (cube[1][2][0] == (*corner).face1 && cube[5][2][0] == (*corner).face2 && cube[4][2][2] == (*corner).face3)
     {
-        corner.face1_pos[1][2][0]=1;
-        corner.face2_pos[5][2][2]=1;
-        corner.face3_pos[4][2][2]=1;
+        (*corner).face1_pos[1][2][0] = 1;
+        (*corner).face2_pos[5][2][0] = 1;
+        (*corner).face3_pos[4][2][2] = 1;
     }
-    else if(cube[4][2][2]==corner.face1 && cube[1][2][0]==corner.face2 && cube[5][2][2]==corner.face3)
+    else if (cube[4][2][2] == (*corner).face1 && cube[1][2][0] == (*corner).face2 && cube[5][2][0] == (*corner).face3)
     {
-        corner.face1_pos[4][2][2]=1;
-        corner.face2_pos[1][2][0]=1;
-        corner.face3_pos[5][2][2]=1;
+        (*corner).face1_pos[4][2][2] = 1;
+        (*corner).face2_pos[1][2][0] = 1;
+        (*corner).face3_pos[5][2][0] = 1;
     }
-    else if(cube[4][2][2]==corner.face1 && cube[5][2][2]==corner.face2 && cube[1][2][0]==corner.face3)
+    else if (cube[4][2][2] == (*corner).face1 && cube[5][2][0] == (*corner).face2 && cube[1][2][0] == (*corner).face3)
     {
-        corner.face1_pos[4][2][2]=1;
-        corner.face2_pos[5][2][2]=1;
-        corner.face3_pos[1][2][0]=1;
+        (*corner).face1_pos[4][2][2] = 1;
+        (*corner).face2_pos[5][2][0] = 1;
+        (*corner).face3_pos[1][2][0] = 1;
     }
-    else if(cube[5][2][2]==corner.face1 && cube[1][2][0]==corner.face2 && cube[4][2][2]==corner.face3)
+    else if (cube[5][2][0] == (*corner).face1 && cube[1][2][0] == (*corner).face2 && cube[4][2][2] == (*corner).face3)
     {
-        corner.face1_pos[5][2][2]=1;
-        corner.face2_pos[1][2][0]=1;
-        corner.face3_pos[4][2][2]=1;
+        (*corner).face1_pos[5][2][0] = 1;
+        (*corner).face2_pos[1][2][0] = 1;
+        (*corner).face3_pos[4][2][2] = 1;
     }
-    else if(cube[5][2][2]==corner.face1 && cube[4][2][2]==corner.face2 && cube[1][2][0]==corner.face3)
+    else if (cube[5][2][0] == (*corner).face1 && cube[4][2][2] == (*corner).face2 && cube[1][2][0] == (*corner).face3)
     {
-        corner.face1_pos[5][2][2]=1;
-        corner.face2_pos[4][2][2]=1;
-        corner.face3_pos[1][2][0]=1;
+        (*corner).face1_pos[5][2][0] = 1;
+        (*corner).face2_pos[4][2][2] = 1;
+        (*corner).face3_pos[1][2][0] = 1;
     }
-    else if(cube[1][2][2]==corner.face1 && cube[2][2][0]==corner.face2 && cube[5][2][0]==corner.face3)//第六大种
+    else if (cube[1][2][2] == (*corner).face1 && cube[2][2][0] == (*corner).face2 && cube[5][0][0] == (*corner).face3)//第六大种
     {
-        corner.face1_pos[1][2][2]=1;
-        corner.face2_pos[2][2][0]=1;
-        corner.face3_pos[5][2][0]=1;
+        (*corner).face1_pos[1][2][2] = 1;
+        (*corner).face2_pos[2][2][0] = 1;
+        (*corner).face3_pos[5][0][0] = 1;
     }
-        else if(cube[1][2][2]=corner.face1 && cube[5][2][0]==corner.face2 && cube[2][2][0]==corner.face3)
+    else if (cube[1][2][2] = (*corner).face1 && cube[5][0][0] == (*corner).face2 && cube[2][2][0] == (*corner).face3)
     {
-        corner.face1_pos[1][2][2]=1;
-        corner.face2_pos[5][2][0]=1;
-        corner.face3_pos[2][2][0]=1;
+        (*corner).face1_pos[1][2][2] = 1;
+        (*corner).face2_pos[5][0][0] = 1;
+        (*corner).face3_pos[2][2][0] = 1;
     }
-    else if(cube[2][2][0]==corner.face1 && cube[1][2][2]==corner.face2 && cube[5][2][0]==corner.face3)
+    else if (cube[2][2][0] == (*corner).face1 && cube[1][2][2] == (*corner).face2 && cube[5][0][0] == (*corner).face3)
     {
-        corner.face1_pos[2][2][0]=1;
-        corner.face2_pos[1][2][2]=1;
-        corner.face3_pos[5][2][0]=1;
+        (*corner).face1_pos[2][2][0] = 1;
+        (*corner).face2_pos[1][2][2] = 1;
+        (*corner).face3_pos[5][0][0] = 1;
     }
-    else if(cube[2][2][0]==corner.face1 && cube[5][2][0]==corner.face2 && cube[1][2][2]==corner.face3)
+    else if (cube[2][2][0] == (*corner).face1 && cube[5][0][0] == (*corner).face2 && cube[1][2][2] == (*corner).face3)
     {
-        corner.face1_pos[2][2][0]=1;
-        corner.face2_pos[5][2][0]=1;
-        corner.face3_pos[1][2][2]=1;
+        (*corner).face1_pos[2][2][0] = 1;
+        (*corner).face2_pos[5][0][0] = 1;
+        (*corner).face3_pos[1][2][2] = 1;
     }
-    else if(cube[5][2][0]==corner.face1 && cube[1][2][2]==corner.face2 && cube[2][2][0]==corner.face3)
+    else if (cube[5][0][0] == (*corner).face1 && cube[1][2][2] == (*corner).face2 && cube[2][2][0] == (*corner).face3)
     {
-        corner.face1_pos[5][2][0]=1;
-        corner.face2_pos[1][2][2]=1;
-        corner.face3_pos[2][2][0]=1;
+        (*corner).face1_pos[5][0][0] = 1;
+        (*corner).face2_pos[1][2][2] = 1;
+        (*corner).face3_pos[2][2][0] = 1;
     }
-    else if(cube[5][2][0]==corner.face1 && cube[2][2][0]==corner.face2 && cube[1][2][2]==corner.face3)
+    else if (cube[5][0][0] == (*corner).face1 && cube[2][2][0] == (*corner).face2 && cube[1][2][2] == (*corner).face3)
     {
-        corner.face1_pos[5][2][0]=1;
-        corner.face2_pos[2][2][0]=1;
-        corner.face3_pos[1][2][2]=1;
+        (*corner).face1_pos[5][0][0] = 1;
+        (*corner).face2_pos[2][2][0] = 1;
+        (*corner).face3_pos[1][2][2] = 1;
     }
-    else if(cube[2][2][2]==corner.face1 && cube[3][2][0]==corner.face2 && cube[5][0][0]==corner.face3)//第七大种002、100、402
+    else if (cube[2][2][2] == (*corner).face1 && cube[3][2][0] == (*corner).face2 && cube[5][0][2] == (*corner).face3)//第七大种002、100、402
     {
-        corner.face1_pos[2][2][2]=1;
-        corner.face2_pos[3][2][0]=1;
-        corner.face3_pos[5][0][0]=1;
+        (*corner).face1_pos[2][2][2] = 1;
+        (*corner).face2_pos[3][2][0] = 1;
+        (*corner).face3_pos[5][0][2] = 1;
     }
-       else if(cube[2][2][2]==corner.face1 && cube[5][0][0]==corner.face2 && cube[3][2][0]==corner.face3)
+    else if (cube[2][2][2] == (*corner).face1 && cube[5][0][2] == (*corner).face2 && cube[3][2][0] == (*corner).face3)
     {
-        corner.face1_pos[2][2][2]=1;
-        corner.face2_pos[5][0][0]=1;
-        corner.face3_pos[3][2][0]=1;
+        (*corner).face1_pos[2][2][2] = 1;
+        (*corner).face2_pos[5][0][2] = 1;
+        (*corner).face3_pos[3][2][0] = 1;
     }
-    else if(cube[3][2][0]==corner.face1 && cube[2][2][2]==corner.face2 && cube[5][0][0]==corner.face3)
+    else if (cube[3][2][0] == (*corner).face1 && cube[2][2][2] == (*corner).face2 && cube[5][0][2] == (*corner).face3)
     {
-        corner.face1_pos[3][2][0]=1;
-        corner.face2_pos[2][2][2]=1;
-        corner.face3_pos[5][0][0]=1;
+        (*corner).face1_pos[3][2][0] = 1;
+        (*corner).face2_pos[2][2][2] = 1;
+        (*corner).face3_pos[5][0][2] = 1;
     }
-    else if(cube[3][2][0]==corner.face1 && cube[5][0][0]==corner.face2 && cube[2][2][2]==corner.face3)
+    else if (cube[3][2][0] == (*corner).face1 && cube[5][0][2] == (*corner).face2 && cube[2][2][2] == (*corner).face3)
     {
-        corner.face1_pos[3][2][0]=1;
-        corner.face2_pos[5][0][0]=1;
-        corner.face3_pos[2][2][2]=1;
+        (*corner).face1_pos[3][2][0] = 1;
+        (*corner).face2_pos[5][0][2] = 1;
+        (*corner).face3_pos[2][2][2] = 1;
     }
-    else if(cube[5][0][0]==corner.face1 && cube[2][2][2]==corner.face2 && cube[3][2][0]==corner.face3)
+    else if (cube[5][0][2] == (*corner).face1 && cube[2][2][2] == (*corner).face2 && cube[3][2][0] == (*corner).face3)
     {
-        corner.face1_pos[5][0][0]=1;
-        corner.face2_pos[2][2][2]=1;
-        corner.face3_pos[3][2][0]=1;
+        (*corner).face1_pos[5][0][2] = 1;
+        (*corner).face2_pos[2][2][2] = 1;
+        (*corner).face3_pos[3][2][0] = 1;
     }
-    else if(cube[5][0][0]==corner.face1 && cube[3][2][0]==corner.face2 && cube[2][2][2]==corner.face3)
+    else if (cube[5][0][2] == (*corner).face1 && cube[3][2][0] == (*corner).face2 && cube[2][2][2] == (*corner).face3)
     {
-        corner.face1_pos[5][0][0]=1;
-        corner.face2_pos[3][2][0]=1;
-        corner.face3_pos[2][2][2]=1;
+        (*corner).face1_pos[5][0][2] = 1;
+        (*corner).face2_pos[3][2][0] = 1;
+        (*corner).face3_pos[2][2][2] = 1;
     }
-    else if(cube[3][2][2]==corner.face1 && cube[5][0][2]==corner.face2 && cube[4][2][0]==corner.face3)//第八大种
+    else if (cube[3][2][2] == (*corner).face1 && cube[5][2][2] == (*corner).face2 && cube[4][2][0] == (*corner).face3)//第八大种
     {
-        corner.face1_pos[3][2][2]=1;
-        corner.face2_pos[5][0][2]=1;
-        corner.face3_pos[4][2][0]=1;
+        (*corner).face1_pos[3][2][2] = 1;
+        (*corner).face2_pos[5][2][2] = 1;
+        (*corner).face3_pos[4][2][0] = 1;
     }
-   else if(cube[3][2][2]==corner.face1 && cube[4][2][0]==corner.face2 && cube[5][0][2]==corner.face3)
+    else if (cube[3][2][2] == (*corner).face1 && cube[4][2][0] == (*corner).face2 && cube[5][2][2] == (*corner).face3)
     {
-        corner.face1_pos[3][2][2]=1;
-        corner.face2_pos[4][2][0]=1;
-        corner.face3_pos[5][0][2]=1;
+        (*corner).face1_pos[3][2][2] = 1;
+        (*corner).face2_pos[4][2][0] = 1;
+        (*corner).face3_pos[5][2][2] = 1;
     }
-    else if(cube[4][2][0]==corner.face1 && cube[3][2][2]==corner.face2 && cube[5][0][2]==corner.face3)
+    else if (cube[4][2][0] == (*corner).face1 && cube[3][2][2] == (*corner).face2 && cube[5][2][2] == (*corner).face3)
     {
-        corner.face1_pos[4][2][0]=1;
-        corner.face2_pos[3][2][2]=1;
-        corner.face3_pos[5][0][2]=1;
+        (*corner).face1_pos[4][2][0] = 1;
+        (*corner).face2_pos[3][2][2] = 1;
+        (*corner).face3_pos[5][2][2] = 1;
     }
-    else if(cube[4][2][0]==corner.face1 && cube[5][0][2]==corner.face2 && cube[3][2][2]==corner.face3)
+    else if (cube[4][2][0] == (*corner).face1 && cube[5][2][2] == (*corner).face2 && cube[3][2][2] == (*corner).face3)
     {
-        corner.face1_pos[4][2][0]=1;
-        corner.face2_pos[5][0][2]=1;
-        corner.face3_pos[3][2][2]=1;
+        (*corner).face1_pos[4][2][0] = 1;
+        (*corner).face2_pos[5][2][2] = 1;
+        (*corner).face3_pos[3][2][2] = 1;
     }
-    else if(cube[5][0][2]==corner.face1 && cube[3][2][2]==corner.face2 && cube[4][2][0]==corner.face3)
+    else if (cube[5][2][2] == (*corner).face1 && cube[3][2][2] == (*corner).face2 && cube[4][2][0] == (*corner).face3)
     {
-        corner.face1_pos[5][0][2]=1;
-        corner.face2_pos[3][2][2]=1;
-        corner.face3_pos[4][2][0]=1;
+        (*corner).face1_pos[5][2][2] = 1;
+        (*corner).face2_pos[3][2][2] = 1;
+        (*corner).face3_pos[4][2][0] = 1;
     }
-    else if(cube[5][0][2]==corner.face1 && cube[4][2][0]==corner.face2 && cube[3][2][2]==corner.face3)
+    else if (cube[5][2][2] == (*corner).face1 && cube[4][2][0] == (*corner).face2 && cube[3][2][2] == (*corner).face3)
     {
-        corner.face1_pos[5][0][2]=1;
-        corner.face2_pos[4][2][0]=1;
-        corner.face3_pos[3][2][2]=1;
+        (*corner).face1_pos[5][2][2] = 1;
+        (*corner).face2_pos[4][2][0] = 1;
+        (*corner).face3_pos[3][2][2] = 1;
     }
-    return corner;
 }
 
 void search_edges(edge_pieces* edge)
