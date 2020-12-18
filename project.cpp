@@ -800,6 +800,37 @@ void function_5_4()//see from back\\ok
     up_ckw(); left_ckw(); up_ckw(); left_ckw();
 }
 
+void function_6() //一个还原顶角的函数
+{
+    right_ccw();
+    right_ccw();
+    front_ccw();
+    front_ccw();
+    right_ccw();
+    back_ccw();
+    right_ckw();
+    front_ccw();
+    front_ccw();
+    right_ccw();
+    back_ckw();
+    right_ccw();
+}
+
+void function_7()  //一个还原顶棱的函数
+{
+    right_ckw();
+    up_ccw();
+    right_ckw();
+    up_ckw();
+    right_ckw();
+    up_ckw();
+    right_ckw();
+    up_ccw();
+    right_ccw();
+    up_ccw();
+    right_ccw();
+    right_ccw();
+}
 
 void step1(){
     char colorOftheBottom;
@@ -959,16 +990,56 @@ void step5()  //顶面角
     }
 }
 
-void step6(){
-
+void step6()    //还原顶角
+{
+    int i;
+    while(cube[1][0][0] != cube[1][0][2] || cube[2][0][0] != cube[2][0][2] || cube[3][0][0] != cube[3][0][2] || cube[4][0][0] != cube[4][0][2])
+    {
+        for (i = 0; i < 4; i++)
+            if (cube[3][0][0] == cube[3][0][2])
+            {
+                function_6();
+                break;
+            }
+        if (i == 4)
+        {
+            function_6();
+            continue;
+        }
+    }
+    while (cube[2][0][0] != cube[2][1][0])
+        up_ccw();
 }
 
-void step7(){
-
+void step7() //最后还原
+{
+    int cnt;
+    while (1)
+    {
+        dbg_show();
+        cnt = 0;
+        for (int i = 1; i <= 4; i++)
+            if (cube[i][0][1] != cube[i][1][1])
+                cnt ++;
+        if (cnt == 3)
+        {
+            while (cube[2][0][1] != cube[2][0][0])
+                up_ccw();
+            up_ccw();
+            up_ccw();
+            while (cube[2][0][1] != cube[2][0][0])
+                function_7();
+            dbg_show();
+        }
+        if (cnt == 4)
+            function_7();
+        if (cnt == 0)
+            break;
+        while (cube[2][0][0] != cube[2][1][0])
+            up_ccw();
+    }
 }
-void step8(){
 
-}
 //== Main Function ==//
 int main()
 {
@@ -981,6 +1052,8 @@ int main()
     dbg_show();
     step4();
     step5();
+    step6();
+    step7();
     dbg_show();
     return 0;
 }
