@@ -61,8 +61,8 @@ void function_10();
 
 void search_corners(corner_pieces* corner)//寻找特定角块,
 {//每个块的顺序：abc,acb,bac,bca,cab,cba
-    for(int i=0;i<6;i++)
-        for(int j=0;j<3;j++)
+    for (int i = 0; i < 6; i++)
+        for (int j = 0; j < 3; j++)
             for (int k = 0; k < 3; k++)
             {
                 (*corner).face1_pos[i][j][k] = 0;
@@ -847,164 +847,164 @@ void function_7()  //一个还原顶棱的函数
     right_ccw();
 }
 
-void function1_1(edge_pieces target){
-        if (target.face2_pos[5][2][1])
-        {
-            /* code */
-            back_ccw();
-            back_ccw();
-        }
-        else if (target.face2_pos[5][1][0])
-        {
-            /* code */
-            down_ccw();
-            back_ccw();
-            back_ccw();           
-        }
-        else if (target.face2_pos[5][1][2])
-        {
-            /* code */
-            down_ckw();
-            back_ccw();
-            back_ccw();
-        }
-        else if (target.face2_pos[5][0][1])
-        {
-            down_ckw();
-            down_ckw();
-            back_ccw();
-            back_ccw();
-        }
-        else if (target.face2_pos[1][0][1])
-        {
-            /* code */
-            left_ccw();
-            back_ckw();
-        }
-        else if (target.face2_pos[1][1][0])
-        {
-            /* code */
-            back_ckw();
-        }
-        else if (target.face2_pos[1][1][2])
-        {
-            /* code */
-            left_ccw();
-            left_ccw();
-            back_ckw();
-            left_ckw();
-            left_ckw();
-        }
-        else if (target.face2_pos[1][2][1])
-        {
-            /* code */
-            left_ckw();
-            back_ckw();
-            left_ccw();
-        }
-        else if (target.face2_pos[2][0][1])
-        {
-            /* code */
-            front_ckw();
-            front_ckw();
-            down_ckw();
-            right_ccw();
-            back_ccw();
-            right_ckw();
-        }
-        else if (target.face2_pos[2][1][0])
-        {
-            /* code */
-            left_ckw();
-            down_ccw();
-            back_ccw();
-            back_ccw();
-            left_ccw();
-        }
-        else if (target.face2_pos[2][1][2])
-        {
-            /* code */
-            right_ccw();
-            down_ckw();
-            right_ckw();
-            back_ccw();
-            back_ccw();
-        }
-        else if (target.face2_pos[2][2][1])
-        {
-            /* code */
-            down_ckw();
-            right_ccw();
-            back_ccw();
-            right_ckw();
-        }
-        else if (target.face2_pos[3][0][1])
-        {
-            /* code */
-            right_ckw();
-            back_ccw();
-        }
+void function1_1(edge_pieces target) {
+    if (target.face2_pos[5][2][1])
+    {
+        /* code */
+        back_ccw();
+        back_ccw();
+    }
+    else if (target.face2_pos[5][1][0])
+    {
+        /* code */
+        down_ccw();
+        back_ccw();
+        back_ccw();
+    }
+    else if (target.face2_pos[5][1][2])
+    {
+        /* code */
+        down_ckw();
+        back_ccw();
+        back_ccw();
+    }
+    else if (target.face2_pos[5][0][1])
+    {
+        down_ckw();
+        down_ckw();
+        back_ccw();
+        back_ccw();
+    }
+    else if (target.face2_pos[1][0][1])
+    {
+        /* code */
+        left_ccw();
+        back_ckw();
+    }
+    else if (target.face2_pos[1][1][0])
+    {
+        /* code */
+        back_ckw();
+    }
+    else if (target.face2_pos[1][1][2])
+    {
+        /* code */
+        left_ccw();
+        left_ccw();
+        back_ckw();
+        left_ckw();
+        left_ckw();
+    }
+    else if (target.face2_pos[1][2][1])
+    {
+        /* code */
+        left_ckw();
+        back_ckw();
+        left_ccw();
+    }
+    else if (target.face2_pos[2][0][1])
+    {
+        /* code */
+        front_ckw();
+        front_ckw();
+        down_ckw();
+        right_ccw();
+        back_ccw();
+        right_ckw();
+    }
+    else if (target.face2_pos[2][1][0])
+    {
+        /* code */
+        left_ckw();
+        down_ccw();
+        back_ccw();
+        back_ccw();
+        left_ccw();
+    }
+    else if (target.face2_pos[2][1][2])
+    {
+        /* code */
+        right_ccw();
+        down_ckw();
+        right_ckw();
+        back_ccw();
+        back_ccw();
+    }
+    else if (target.face2_pos[2][2][1])
+    {
+        /* code */
+        down_ckw();
+        right_ccw();
+        back_ccw();
+        right_ckw();
+    }
+    else if (target.face2_pos[3][0][1])
+    {
+        /* code */
+        right_ckw();
+        back_ccw();
+    }
 
-        else if (target.face2_pos[3][1][0])
-        {
-            /* code */
-            right_ccw();
-            right_ccw();
-            back_ccw();
-            right_ckw();
-            right_ckw();
-        }
+    else if (target.face2_pos[3][1][0])
+    {
+        /* code */
+        right_ccw();
+        right_ccw();
+        back_ccw();
+        right_ckw();
+        right_ckw();
+    }
 
-        else if (target.face2_pos[3][1][2])
-        {
-            /* code */
-            back_ccw();
-        }
+    else if (target.face2_pos[3][1][2])
+    {
+        /* code */
+        back_ccw();
+    }
 
-        else if (target.face2_pos[3][2][1])
-        {
-            /* code */
-            right_ccw();
-            back_ccw();
-            right_ckw();
-        }
+    else if (target.face2_pos[3][2][1])
+    {
+        /* code */
+        right_ccw();
+        back_ccw();
+        right_ckw();
+    }
 
-        else if (target.face2_pos[4][0][1])
-        {
-            /* code */
-            back_ccw();
-            back_ccw();
-            down_ccw();
-            right_ccw();
-            back_ccw();
-            right_ckw();
-        }
-        else if (target.face2_pos[4][1][0])
-        {
-            /* code */
-            back_ckw();
-            down_ccw();
-            right_ccw();
-            back_ccw();
-            right_ckw();
-        }
-        else if (target.face2_pos[4][1][2])
-        {
-            /* code */
-            left_ccw();
-            down_ccw();
-            back_ckw();
-            back_ckw();
-            left_ckw();
-        }
-        else if (target.face2_pos[4][2][1])
-        {
-            /* code */
-            down_ccw();
-            right_ccw();
-            back_ccw();
-            right_ckw();
-        }
+    else if (target.face2_pos[4][0][1])
+    {
+        /* code */
+        back_ccw();
+        back_ccw();
+        down_ccw();
+        right_ccw();
+        back_ccw();
+        right_ckw();
+    }
+    else if (target.face2_pos[4][1][0])
+    {
+        /* code */
+        back_ckw();
+        down_ccw();
+        right_ccw();
+        back_ccw();
+        right_ckw();
+    }
+    else if (target.face2_pos[4][1][2])
+    {
+        /* code */
+        left_ccw();
+        down_ccw();
+        back_ckw();
+        back_ckw();
+        left_ckw();
+    }
+    else if (target.face2_pos[4][2][1])
+    {
+        /* code */
+        down_ccw();
+        right_ccw();
+        back_ccw();
+        right_ckw();
+    }
 }
 
 void step1()
@@ -1057,23 +1057,23 @@ void step1()
         if (!tmark)
         {
             if (!(front.face2_pos[0][0][1] || front.face2_pos[0][1][0] || front.face2_pos[0][1][2] || front.face2_pos[0][2][1]))
-                    function1_1(front);
+                function1_1(front);
             else  if (!(left.face2_pos[0][0][1] || left.face2_pos[0][1][0] || left.face2_pos[0][1][2] || left.face2_pos[0][2][1]))
-                    function1_1(left);
+                function1_1(left);
             else  if (!(right.face2_pos[0][0][1] || right.face2_pos[0][1][0] || right.face2_pos[0][1][2] || right.face2_pos[0][2][1]))
-                    function1_1(right);
+                function1_1(right);
             else  if (!(back.face2_pos[0][0][1] || back.face2_pos[0][1][0] || back.face2_pos[0][1][2] || back.face2_pos[0][2][1]))
-                    function1_1(back);
+                function1_1(back);
         }
         dbg_show();
     }
-    
+
     search_edges(&front);
     search_edges(&left);
     search_edges(&back);
     search_edges(&right);
     //复原四个棱块
-    while (cube[2][0][1]!=front.face1 || cube[0][2][1] != front.face2)
+    while (cube[2][0][1] != front.face1 || cube[0][2][1] != front.face2)
     {
         up_ccw();
     }
@@ -1095,7 +1095,7 @@ void step1()
     search_edges(&back);
     search_edges(&right);
 
-    while (cube[3][0][1] != right.face1 || cube[0][1][2]!=right.face2)
+    while (cube[3][0][1] != right.face1 || cube[0][1][2] != right.face2)
     {
         up_ccw();
         dbg_show();
@@ -1221,7 +1221,7 @@ void step2()
         }
         else
         {
-           if (FRD.face1_pos[5][0][2] || FRD.face2_pos[5][0][2] || FRD.face1_pos[3][2][0])
+            if (FRD.face1_pos[5][0][2] || FRD.face2_pos[5][0][2] || FRD.face1_pos[3][2][0])
             {
                 /* code */
                 right_ckw();
@@ -1245,7 +1245,7 @@ void step2()
             }
         }
     }
-    
+
     search_corners(&BLD);
     while (!(BLD.face1_pos[4][2][2] && BLD.face2_pos[1][2][0] && BLD.face3_pos[5][2][0]))
     {
@@ -1287,7 +1287,7 @@ void step2()
                 search_corners(&BLD);
             }
         }
-    } 
+    }
 
     search_corners(&BRD);
     while (!(BRD.face1_pos[4][2][0] && BRD.face2_pos[3][2][2] && BRD.face3_pos[5][2][2]))
@@ -1315,7 +1315,7 @@ void step2()
         }
         else
         {
-           if (BRD.face1_pos[5][2][2] || BRD.face2_pos[5][2][2] || BRD.face1_pos[3][2][2])
+            if (BRD.face1_pos[5][2][2] || BRD.face2_pos[5][2][2] || BRD.face1_pos[3][2][2])
             {
                 left_ckw();
                 up_ckw();
@@ -1338,6 +1338,12 @@ void step3(char a, char b, char c, char d, char e, char f)//  还原中间棱块
         function_3_1();
     else if (!(A.face2_pos[2][1][0] == 1 && A.face1_pos[1][1][2] == 1))
     {
+        if((A.face1_pos[3][1][0] == 1 && A.face2_pos[2][1][2] == 1) || (A.face2_pos[3][1][0] == 1 && A.face1_pos[2][1][2] == 1))
+            function_4_2();
+        else if((A.face1_pos[4][1][0] == 1 && A.face2_pos[3][1][2] == 1) || (A.face2_pos[4][1][0] == 1 && A.face1_pos[3][1][2] == 1))
+            function_4_3();
+        else if ((A.face1_pos[1][1][0] == 1 && A.face2_pos[4][1][2] == 1) || (A.face2_pos[1][1][0] == 1 && A.face1_pos[4][1][2] == 1))
+            function_4_4();
         while (!((A.face1_pos[1][0][1] == 1 && A.face2_pos[0][1][0] == 1) || (A.face1_pos[0][2][1] == 1 && A.face2_pos[2][0][1] == 1)))
         {
             up_ckw();
@@ -1354,6 +1360,12 @@ void step3(char a, char b, char c, char d, char e, char f)//  还原中间棱块
         function_3_2();
     else if (!(B.face2_pos[3][1][0] == 1 && B.face1_pos[2][1][2] == 1))
     {
+        if ((B.face1_pos[2][1][0] == 1 && B.face2_pos[1][1][2] == 1) || (B.face2_pos[2][1][0] == 1 && B.face1_pos[1][1][2] == 1))
+            function_4_1();
+        else if ((B.face1_pos[4][1][0] == 1 && B.face2_pos[3][1][2] == 1) || (B.face2_pos[4][1][0] == 1 && B.face1_pos[3][1][2] == 1))
+            function_4_3();
+        else if ((B.face1_pos[1][1][0] == 1 && B.face2_pos[4][1][2] == 1) || (B.face2_pos[1][1][0] == 1 && B.face1_pos[4][1][2] == 1))
+            function_4_4();
         while (!((B.face1_pos[2][0][1] == 1 && B.face2_pos[0][2][1] == 1) || (B.face1_pos[0][1][2] == 1 && B.face2_pos[3][0][1] == 1)))
         {
             up_ckw();
@@ -1370,6 +1382,12 @@ void step3(char a, char b, char c, char d, char e, char f)//  还原中间棱块
         function_3_3();
     else if (!(C.face2_pos[4][1][0] == 1 && C.face1_pos[3][1][2] == 1))
     {
+        if ((C.face1_pos[2][1][0] == 1 && C.face2_pos[1][1][2] == 1) || (C.face2_pos[2][1][0] == 1 && C.face1_pos[1][1][2] == 1))
+            function_4_1();
+        else if ((C.face1_pos[3][1][0] == 1 && C.face2_pos[2][1][2] == 1) || (C.face2_pos[3][1][0] == 1 && C.face1_pos[2][1][2] == 1))
+            function_4_2();
+        else if ((C.face1_pos[1][1][0] == 1 && C.face2_pos[4][1][2] == 1) || (C.face2_pos[1][1][0] == 1 && C.face1_pos[4][1][2] == 1))
+            function_4_4();
         while (!((C.face1_pos[3][0][1] == 1 && C.face2_pos[0][1][2] == 1) || (C.face1_pos[0][0][1] == 1 && C.face2_pos[4][0][1] == 1)))
         {
             up_ckw();
@@ -1386,6 +1404,12 @@ void step3(char a, char b, char c, char d, char e, char f)//  还原中间棱块
         function_3_4();
     else if (!(D.face2_pos[1][1][0] == 1 && D.face1_pos[4][1][2] == 1))
     {
+        if ((D.face1_pos[2][1][0] == 1 && D.face2_pos[1][1][2] == 1) || (D.face2_pos[2][1][0] == 1 && D.face1_pos[1][1][2] == 1))
+            function_4_1();
+        else if ((D.face1_pos[3][1][0] == 1 && D.face2_pos[2][1][2] == 1) || (D.face2_pos[3][1][0] == 1 && D.face1_pos[2][1][2] == 1))
+            function_4_2();
+        else if ((D.face1_pos[4][1][0] == 1 && D.face2_pos[3][1][2] == 1) || (D.face2_pos[4][1][0] == 1 && D.face1_pos[3][1][2] == 1))
+            function_4_3();
         while (!((D.face1_pos[4][0][1] == 1 && D.face2_pos[0][0][1] == 1) || (D.face1_pos[0][1][0] == 1 && D.face2_pos[1][0][1] == 1)))
         {
             up_ckw();
@@ -1403,7 +1427,7 @@ void step4() //顶部十字
 {
     while (!(cube[0][0][1] == cube[0][1][1] && cube[0][1][0] == cube[0][1][1] && cube[0][2][1] == cube[0][1][1] && cube[0][1][2] == cube[0][1][1]))
     {
-        if (cube[0][1][1] == cube[0][2][1])
+        if (cube[0][1][1] != cube[2][0][1])
             up_ckw();
         else
             function_1();
