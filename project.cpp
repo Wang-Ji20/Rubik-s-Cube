@@ -61,6 +61,14 @@ void function_10();
 
 void search_corners(corner_pieces* corner)//寻找特定角块,
 {//每个块的顺序：abc,acb,bac,bca,cab,cba
+    for(int i=0;i<6;i++)
+        for(int j=0;j<3;j++)
+            for (int k = 0; k < 3; k++)
+            {
+                (*corner).face1_pos[i][j][k] = 0;
+                (*corner).face2_pos[i][j][k] = 0;
+                (*corner).face3_pos[i][j][k] = 0;
+            }
     if (cube[0][0][2] == (*corner).face1 && cube[4][0][0] == (*corner).face2 && cube[3][0][2] == (*corner).face3)//第一大种
     {
         (*corner).face1_pos[0][0][2] = 1;
@@ -165,39 +173,39 @@ void search_corners(corner_pieces* corner)//寻找特定角块,
     }
     else if (cube[2][0][0] == (*corner).face1 && cube[1][0][2] == (*corner).face2 && cube[0][2][0] == (*corner).face3)
     {
-    (*corner).face1_pos[2][0][0] = 1;
+        (*corner).face1_pos[2][0][0] = 1;
         (*corner).face2_pos[1][0][2] = 1;
         (*corner).face3_pos[0][2][0] = 1;
     }
     else if (cube[0][2][2] == (*corner).face1 && cube[2][0][2] == (*corner).face2 && cube[3][0][0] == (*corner).face3)//第四大种
     {
-    (*corner).face1_pos[0][2][2] = 1;
+        (*corner).face1_pos[0][2][2] = 1;
         (*corner).face2_pos[2][0][2] = 1;
         (*corner).face3_pos[3][0][0] = 1;
     }
     else if (cube[0][2][2] == (*corner).face1 && cube[3][0][0] == (*corner).face2 && cube[2][0][2] == (*corner).face3)
     {
-    (*corner).face1_pos[0][2][2] = 1;
-    (*corner).face2_pos[3][0][0] = 1;
-    (*corner).face3_pos[2][0][2] = 1;
+        (*corner).face1_pos[0][2][2] = 1;
+        (*corner).face2_pos[3][0][0] = 1;
+        (*corner).face3_pos[2][0][2] = 1;
     }
     else if (cube[3][0][0] == (*corner).face1 && cube[0][2][2] == (*corner).face2 && cube[2][0][2] == (*corner).face3)
     {
-    (*corner).face1_pos[3][0][0] = 1;
-    (*corner).face2_pos[0][2][2] = 1;
-    (*corner).face3_pos[2][0][2] = 1;
+        (*corner).face1_pos[3][0][0] = 1;
+        (*corner).face2_pos[0][2][2] = 1;
+        (*corner).face3_pos[2][0][2] = 1;
     }
     else if (cube[3][0][0] == (*corner).face1 && cube[2][0][2] == (*corner).face2 && cube[0][2][2] == (*corner).face3)
     {
-    (*corner).face1_pos[3][0][0] = 1;
-    (*corner).face2_pos[2][0][2] = 1;
+        (*corner).face1_pos[3][0][0] = 1;
+        (*corner).face2_pos[2][0][2] = 1;
         (*corner).face3_pos[0][2][2] = 1;
     }
     else if (cube[2][0][2] == (*corner).face1 && cube[0][2][2] == (*corner).face2 && cube[3][0][0] == (*corner).face3)
     {
-    (*corner).face1_pos[2][0][2] = 1;
-    (*corner).face2_pos[0][2][2] = 1;
-    (*corner).face3_pos[3][0][0] = 1;
+        (*corner).face1_pos[2][0][2] = 1;
+        (*corner).face2_pos[0][2][2] = 1;
+        (*corner).face3_pos[3][0][0] = 1;
     }
     else if (cube[2][0][2] == (*corner).face1 && cube[3][0][0] == (*corner).face2 && cube[0][2][2] == (*corner).face3)
     {
@@ -353,6 +361,13 @@ void search_corners(corner_pieces* corner)//寻找特定角块,
 
 void search_edges(edge_pieces* edge)
 {//寻找特定棱块
+    for (int i = 0; i < 6; i++)
+        for (int j = 0; j < 3; j++)
+            for (int k = 0; k < 3; k++)
+            {
+                (*edge).face1_pos[i][j][k] = 0;
+                (*edge).face2_pos[i][j][k] = 0;
+            }
     if (cube[0][0][1] == (*edge).face1 && cube[4][0][1] == (*edge).face2)//第一种
     {
         (*edge).face1_pos[0][0][1] = 1;
@@ -455,13 +470,13 @@ void search_edges(edge_pieces* edge)
     }
     else if (cube[3][2][1] == (*edge).face1 && cube[5][1][2] == (*edge).face2)//第十一种
     {
-    (*edge).face1_pos[3][2][1] = 1;
-    (*edge).face2_pos[5][1][2] = 1;
+        (*edge).face1_pos[3][2][1] = 1;
+        (*edge).face2_pos[5][1][2] = 1;
     }
     else if (cube[5][1][2] == (*edge).face1 && cube[3][2][1] == (*edge).face2)
     {
-    (*edge).face1_pos[5][1][2] = 1;
-    (*edge).face2_pos[3][2][1] = 1;
+        (*edge).face1_pos[5][1][2] = 1;
+        (*edge).face2_pos[3][2][1] = 1;
     }
     else if (cube[4][2][1] == (*edge).face1 && cube[5][2][1] == (*edge).face2)//第十二种
     {
@@ -470,8 +485,8 @@ void search_edges(edge_pieces* edge)
     }
     else if (cube[5][2][1] == (*edge).face1 && cube[4][2][1] == (*edge).face2)
     {
-    (*edge).face1_pos[5][2][1] = 1;
-    (*edge).face2_pos[4][2][1] = 1;
+        (*edge).face1_pos[5][2][1] = 1;
+        (*edge).face2_pos[4][2][1] = 1;
     }
 }
 
