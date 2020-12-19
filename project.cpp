@@ -255,7 +255,7 @@ void search_corners(corner_pieces* corner)//寻找特定角块,
         (*corner).face2_pos[2][2][0] = 1;
         (*corner).face3_pos[5][0][0] = 1;
     }
-    else if (cube[1][2][2] = (*corner).face1 && cube[5][0][0] == (*corner).face2 && cube[2][2][0] == (*corner).face3)
+    else if (cube[1][2][2] == (*corner).face1 && cube[5][0][0] == (*corner).face2 && cube[2][2][0] == (*corner).face3)
     {
         (*corner).face1_pos[1][2][2] = 1;
         (*corner).face2_pos[5][0][0] = 1;
@@ -1119,16 +1119,212 @@ void step1()
     search_edges(&right);
 }
 
+
 void step2()
 {
-    front_ckw();
-    front_ckw();
-    right_ckw();
-    right_ckw();
-    back_ckw();
-    back_ckw();
-    left_ckw();
-    left_ckw();
+    corner_pieces FLD = { cube[2][1][1],cube[1][1][1],cube[5][1][1] };
+    corner_pieces FRD = { cube[2][1][1],cube[3][1][1],cube[5][1][1] };
+    corner_pieces BLD = { cube[4][1][1],cube[1][1][1],cube[5][1][1] };
+    corner_pieces BRD = { cube[4][1][1],cube[3][1][1],cube[5][1][1] };
+    dbg_show();
+    search_corners(&FLD);
+    search_corners(&FRD);
+    search_corners(&BLD);
+    search_corners(&BRD);
+
+    while (!(FLD.face1_pos[2][2][0] && FLD.face2_pos[1][2][2] && FLD.face3_pos[5][0][0]))
+    {
+        if (FLD.face1_pos[0][0][0] || FLD.face1_pos[0][0][2] || FLD.face1_pos[0][2][0] || FLD.face1_pos[0][2][2]
+            || FLD.face1_pos[1][0][0] || FLD.face1_pos[1][0][2] || FLD.face1_pos[2][0][0] || FLD.face1_pos[2][0][2]
+            || FLD.face1_pos[3][0][0] || FLD.face1_pos[3][0][2] || FLD.face1_pos[4][0][0] || FLD.face1_pos[4][0][2])
+        {
+            /* case 1 */
+            while (!(
+                (FLD.face2_pos[0][2][0] && FLD.face1_pos[2][0][0] && FLD.face3_pos[1][0][2])
+                || (FLD.face1_pos[0][2][0] && FLD.face3_pos[2][0][0] && FLD.face2_pos[1][0][2])
+                || (FLD.face3_pos[0][2][0] && FLD.face2_pos[2][0][0] && FLD.face1_pos[1][0][2])
+                ))
+            {
+                /* code */
+                up_ccw();
+                search_corners(&FLD);
+            }
+            while (!(FLD.face1_pos[2][2][0] && FLD.face2_pos[1][2][2] && FLD.face3_pos[5][0][0])) {
+                left_ccw();
+                up_ccw();
+                left_ckw();
+                up_ckw();
+                search_corners(&FLD);
+            }
+        }
+        else
+        {
+            /* code */
+            if (FLD.face1_pos[5][0][0] || FLD.face2_pos[5][0][0] || FLD.face1_pos[1][2][2])
+            {
+                /* code */
+                left_ccw();
+                up_ckw();
+                left_ckw();
+                search_corners(&FLD);
+            }
+            else if (FLD.face1_pos[5][0][2] || FLD.face2_pos[5][0][2] || FLD.face3_pos[5][0][2])
+            {
+                /* code */
+                right_ckw();
+                up_ckw();
+                right_ccw();
+                search_corners(&FLD);
+            }
+            else if (FLD.face1_pos[5][2][2] || FLD.face2_pos[5][2][2] || FLD.face3_pos[5][2][2])
+            {
+                right_ccw();
+                up_ckw();
+                right_ckw();
+                search_corners(&FLD);
+            }
+            else if (FLD.face1_pos[5][2][0] || FLD.face2_pos[5][2][0] || FLD.face3_pos[5][2][0])
+            {
+                left_ckw();
+                up_ckw();
+                left_ccw();
+                search_corners(&FLD);
+            }
+        }
+    }
+
+    search_corners(&FRD);
+    while (!(FRD.face1_pos[2][2][2] && FRD.face2_pos[3][2][0] && FRD.face3_pos[5][0][2]))
+    {
+        if (FRD.face1_pos[0][0][0] || FRD.face1_pos[0][0][2] || FRD.face1_pos[0][2][0] || FRD.face1_pos[0][2][2]
+            || FRD.face1_pos[1][0][0] || FRD.face1_pos[1][0][2] || FRD.face1_pos[2][0][0] || FRD.face1_pos[2][0][2]
+            || FRD.face1_pos[3][0][0] || FRD.face1_pos[3][0][2] || FRD.face1_pos[4][0][0] || FRD.face1_pos[4][0][2])
+        {
+            /* case 1 */
+            while (!(
+                (FRD.face1_pos[0][2][2] && FRD.face2_pos[3][0][0] && FRD.face3_pos[2][0][2])
+                || (FRD.face2_pos[0][2][2] && FRD.face3_pos[3][0][0] && FRD.face1_pos[2][0][2])
+                || (FRD.face3_pos[0][2][2] && FRD.face1_pos[3][0][0] && FRD.face2_pos[2][0][2])
+                ))
+            {
+                /* code */
+                up_ccw();
+                search_corners(&FRD);
+            }
+            while (!(FRD.face1_pos[2][2][2] && FRD.face2_pos[3][2][0] && FRD.face3_pos[5][0][2])) {
+                right_ckw();
+                up_ckw();
+                right_ccw();
+                up_ccw();
+                search_corners(&FRD);
+            }
+        }
+        else
+        {
+           if (FRD.face1_pos[5][0][2] || FRD.face2_pos[5][0][2] || FRD.face1_pos[3][2][0])
+            {
+                /* code */
+                right_ckw();
+                up_ckw();
+                right_ccw();
+                search_corners(&FRD);
+            }
+            else if (FRD.face1_pos[5][2][2] || FRD.face2_pos[5][2][2] || FRD.face3_pos[5][2][2])
+            {
+                right_ccw();
+                up_ckw();
+                right_ckw();
+                search_corners(&FRD);
+            }
+            else if (FRD.face1_pos[5][2][0] || FRD.face2_pos[5][2][0] || FRD.face3_pos[5][2][0])
+            {
+                left_ckw();
+                up_ckw();
+                left_ccw();
+                search_corners(&FRD);
+            }
+        }
+    }
+    
+    search_corners(&BLD);
+    while (!(BLD.face1_pos[4][2][2] && BLD.face2_pos[1][2][0] && BLD.face3_pos[5][2][0]))
+    {
+        if (BLD.face1_pos[0][0][0] || BLD.face1_pos[0][0][2] || BLD.face1_pos[0][2][0] || BLD.face1_pos[0][2][2]
+            || BLD.face1_pos[1][0][0] || BLD.face1_pos[1][0][2] || BLD.face1_pos[2][0][0] || BLD.face1_pos[2][0][2]
+            || BLD.face1_pos[3][0][0] || BLD.face1_pos[3][0][2] || BLD.face1_pos[4][0][0] || BLD.face1_pos[4][0][2])
+        {
+            while (!(
+                (BLD.face2_pos[0][0][0] && BLD.face1_pos[4][0][2] && BLD.face3_pos[1][0][0])
+                || (BLD.face1_pos[0][0][0] && BLD.face3_pos[4][0][2] && BLD.face2_pos[1][0][0])
+                || (BLD.face3_pos[0][0][0] && BLD.face2_pos[4][0][2] && BLD.face1_pos[1][0][0])
+                ))
+            {
+                up_ccw();
+                search_corners(&BLD);
+            }
+            while (!(BLD.face1_pos[4][2][2] && BLD.face2_pos[1][2][0] && BLD.face3_pos[5][2][0])) {
+                left_ckw();
+                up_ckw();
+                left_ccw();
+                up_ccw();
+                search_corners(&BLD);
+            }
+        }
+        else
+        {
+            if (BLD.face1_pos[5][2][2] || BLD.face2_pos[5][2][2] || BLD.face1_pos[1][2][0])
+            {
+                right_ccw();
+                up_ckw();
+                right_ckw();
+                search_corners(&BLD);
+            }
+            else if (BLD.face1_pos[5][2][0] || BLD.face2_pos[5][2][0] || BLD.face3_pos[5][2][0])
+            {
+                left_ckw();
+                up_ckw();
+                left_ccw();
+                search_corners(&BLD);
+            }
+        }
+    } 
+
+    search_corners(&BRD);
+    while (!(BRD.face1_pos[4][2][0] && BRD.face2_pos[3][2][2] && BRD.face3_pos[5][2][2]))
+    {
+        if (BRD.face1_pos[0][0][0] || BRD.face1_pos[0][0][2] || BRD.face1_pos[0][2][0] || BRD.face1_pos[0][2][2]
+            || BRD.face1_pos[1][0][0] || BRD.face1_pos[1][0][2] || BRD.face1_pos[2][0][0] || BRD.face1_pos[2][0][2]
+            || BRD.face1_pos[3][0][0] || BRD.face1_pos[3][0][2] || BRD.face1_pos[4][0][0] || BRD.face1_pos[4][0][2])
+        {
+            while (!(
+                (BRD.face2_pos[0][0][2] && BRD.face1_pos[4][0][0] && BRD.face3_pos[3][0][2])
+                || (BRD.face1_pos[0][0][2] && BRD.face3_pos[4][0][0] && BRD.face2_pos[3][0][2])
+                || (BRD.face3_pos[0][0][2] && BRD.face2_pos[4][0][0] && BRD.face1_pos[3][0][2])
+                ))
+            {
+                up_ccw();
+                search_corners(&BRD);
+            }
+            while (!(BRD.face1_pos[4][2][0] && BRD.face2_pos[3][2][2] && BRD.face3_pos[5][2][2])) {
+                right_ccw();
+                up_ccw();
+                right_ckw();
+                up_ckw();
+                search_corners(&BRD);
+            }
+        }
+        else
+        {
+           if (BRD.face1_pos[5][2][2] || BRD.face2_pos[5][2][2] || BRD.face1_pos[3][2][2])
+            {
+                left_ckw();
+                up_ckw();
+                left_ccw();
+                search_corners(&BRD);
+            }
+        }
+    }
+    dbg_show();
 }
 
 void step3(char a, char b, char c, char d, char e, char f)//  还原中间棱块 ,将6个面中心块具体颜色输入                                                   
