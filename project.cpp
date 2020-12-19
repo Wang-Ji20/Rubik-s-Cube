@@ -833,29 +833,224 @@ void function_7()  //一个还原顶棱的函数
 }
 
 void step1(){
-    char colorOftheBottom;
-    colorOftheBottom =cube[5][2][2];
-    while(cube[5][0][1]!=colorOftheBottom && cube[5][2][1]!=colorOftheBottom
-    && cube[5][1][1]!=colorOftheBottom && cube[5][2][1]!=colorOftheBottom
-    && cube[1][2][1]!=cube[1][1][1] && cube[2][2][1]!=cube[2][1][1]
-    && cube[3][2][1]!=cube[3][1][1] && cube[4][2][1]!=cube[4][1][1]){
-        if(cube[2][2][1]!=cube[2][1][1] || cube[5][0][1]!=colorOftheBottom){
-            edge_pieces front= {colorOftheBottom,cube[2][1][1],-1,-1};
-            search_edges(&front);
-        }
-        else if(cube[4][2][1]!=cube[4][1][1] || cube[5][2][1]!=colorOftheBottom){
-            edge_pieces back= {colorOftheBottom,cube[2][1][1],-1,-1};
-            search_edges(&back);
-        }
-        else if(cube[3][2][1]!=cube[3][1][1] || cube[5][2][0]!=colorOftheBottom){
-            edge_pieces right= {colorOftheBottom,cube[2][1][1],-1,-1};
-            search_edges(&right);
-        }
-        else if(cube[1][2][1]!=cube[1][1][1] || cube[5][1][0]!=colorOftheBottom){
-            edge_pieces left= {colorOftheBottom,cube[2][1][1],-1,-1};
-            search_edges(&left);
-        }
+    //使得棱块和中心块颜色一致
+    //转动对着自己的一层完成蓝白棱块
+    //转动顶层使得侧面颜色相同，并且转动一层完成红白棱块
+    char centralBlocks[6]={cube[0][1][1],cube[1][1][1],cube[2][1][1],cube[3][1][1],cube[4][1][1],cube[5][1][1]};
+    char memo[100][6][3][3]={};
+     
+    edge_pieces front={centralBlocks[2],centralBlocks[5]};
+    edge_pieces left={centralBlocks[1],centralBlocks[5]};
+    edge_pieces back={centralBlocks[4],centralBlocks[5]};
+    edge_pieces right={centralBlocks[3],centralBlocks[5]};
+    search_edges(&front);
+    search_edges(&left);
+    search_edges(&back);
+    search_edges(&right);
+    struct mark{
+        bool t01=false;
+        bool t10=false;
+        bool t21=false;
+        bool t12=false;
+    } tmark;
+         
+    bool flag=0;
+
+    while (cube[0][0][1]!=centralBlocks[5] && cube[0][1][0]!=centralBlocks[5] && cube[0][1][2]!=centralBlocks[5] && cube[0][2][1]!=centralBlocks[5])
+    {
+    if (cube[0][0][1]==centralBlocks[5])
+    {
+        /* code */
+        tmark.t01=1;
     }
+    if (cube[0][1][0]==centralBlocks[5])
+    {
+        /* code */
+        tmark.t10=1;
+    }
+    if (cube[0][0][2]==centralBlocks[5])
+    {
+        /* code */
+        tmark.t21=1;
+    }
+    if (cube[0][1][2]==centralBlocks[5])
+    {
+        /* code */
+        tmark.t12=1;
+    } 
+
+    for (size_t i = 0; i < 4; i++)
+    {
+        /* code */
+        if (tmark.t01!=0)
+        {
+            /* code */
+            up_ccw();
+        }
+        else break;
+    }
+        //把所有白色棱块转到顶面
+        while (!tmark.t01)
+        {
+            /* 思路
+            搜索顶部，看看哪个位置没有白色棱块。
+                如果找到一个位置没有白色棱块，就把那个位置转到01
+                之后针对这个位置，寻找一个白色棱块，将它旋转到顶部
+             */
+            if (!(front.face2_pos[0][0][1] || front.face2_pos[0][1][0] || front.face2_pos[0][1][2] || front.face2_pos[0][2][1]))
+            {
+               if (front.face2_pos[5][2][1])
+               {
+                   /* code */
+                   back_ccw();
+                   back_ccw();
+               }
+               else if (front.face2_pos[5][1][0])
+               {
+                   /* code */
+                   down_ckw();
+                   back_ccw();
+                   back_ccw();
+               }
+               else if(front.face2_pos[5][1][2])
+               {
+                   /* code */
+                   down_ccw();
+                   back_ccw();
+                   back_ccw();
+               }
+               else if(front.face2_pos[5][0][1]){
+                   down_ccw();
+                   down_ccw();
+                   back_ccw();
+                   back_ccw();
+               }
+                else if (front.face2_pos[1][0][1])
+                {
+                    /* code */
+                    left_ccw();
+                    back_ckw();
+                }
+                else if (front.face2_pos[1][1][0])
+                {
+                    /* code */
+                    back_ckw();
+                }
+                else if (front.face2_pos[1][1][2])
+                {
+                    /* code */
+                    left_ccw();
+                    left_ccw();
+                    back_ckw();
+                    left_ckw();
+                    left_ckw();
+                }
+                else if (front.face2_pos[1][2][1])
+                {
+                    /* code */
+                    left_ckw();
+                    back_ckw();
+                    left_ccw();
+                }
+                else if (front.face2_pos[2][0][1])
+                {
+                    /* code */
+                    front_ckw();
+                    front_ckw();
+                    down_ccw();
+                    right_ccw();
+                    back_ccw();
+                    right_ckw();
+                }
+                 else if (front.face2_pos[2][1][0])
+                {
+                    /* code */
+                    left_ckw();
+                    down_ckw();
+                    back_ccw();
+                    back_ccw();
+                    left_ccw();
+                }
+                 else if (front.face2_pos[2][1][2])
+                {
+                    /* code */
+                    right_ckw();
+                    down_ccw();
+                    right_ccw();
+                    back_ccw();
+                    back_ccw();
+                }
+                 else if (front.face2_pos[2][2][1])
+                {
+                    /* code */
+                    down_ccw();
+                    right_ccw();
+                    back_ccw();
+                    right_ckw();
+                }
+                else if (front.face2_pos[3][0][1])
+                {
+                    /* code */
+                    right_ckw();
+                    back_ccw();
+                }
+
+                else if (front.face2_pos[3][1][0])
+                {
+                    /* code */
+                    right_ccw();
+                    right_ccw();
+                    back_ccw();
+                    right_ckw();
+                    right_ckw();
+                }
+
+                else if (front.face2_pos[3][1][2])
+                {
+                    /* code */
+                    back_ccw();
+                }
+
+                else if (front.face2_pos[3][2][1])
+                {
+                    /* code */
+                    right_ccw();
+                    back_ccw();
+                    right_ckw();
+                }
+
+                else if (front.face2_pos[4][0][1])
+                {
+                    /* code */
+                    back_ccw();
+                    back_ccw();
+                    down_ckw();
+                    right_ccw();
+                    back_ccw();
+                    right_ckw();
+                }
+                else if (front.face2_pos[4][1][0])
+                {
+                    /* code */
+                    
+                }
+                else if (front.face2_pos[4][1][2])
+                {
+                    /* code */
+
+                }
+                else if (front.face2_pos[4][2][1])
+                {
+                    /* code */
+
+                }                
+            }
+            
+        }
+        
+        
+    }
+    
 }
 
 
