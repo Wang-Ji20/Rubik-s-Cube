@@ -1508,6 +1508,8 @@ int main()
                 cin >> cube[corres[i]][j][k];
     char A = cube[0][1][1], B = cube[1][1][1], C = cube[2][1][1], D = cube[3][1][1], E = cube[4][1][1], F = cube[5][1][1];//指示6个面中心面块颜色
     dbg_show();
+    step1();
+    step2();
     step3(A, B, C, D, E, F);
     step4();
     step5();
