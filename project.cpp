@@ -1067,6 +1067,56 @@ void step1()
         }
         dbg_show();
     }
+    
+    search_edges(&front);
+    search_edges(&left);
+    search_edges(&back);
+    search_edges(&right);
+    //复原四个棱块
+    while (cube[2][0][1]!=front.face1 || cube[0][2][1] != front.face2)
+    {
+        up_ccw();
+    }
+    front_ccw();
+    front_ccw();
+    search_edges(&front);
+    search_edges(&left);
+    search_edges(&back);
+    search_edges(&right);
+
+    while (cube[1][0][1] != left.face1 || cube[0][1][0] != left.face2)
+    {
+        up_ccw();
+    }
+    left_ccw();
+    left_ccw();
+    search_edges(&front);
+    search_edges(&left);
+    search_edges(&back);
+    search_edges(&right);
+
+    while (cube[3][0][1] != right.face1 || cube[0][1][2]!=right.face2)
+    {
+        up_ccw();
+        dbg_show();
+    }
+    right_ccw();
+    right_ccw();
+    search_edges(&front);
+    search_edges(&left);
+    search_edges(&back);
+    search_edges(&right);
+
+    while (cube[4][0][1] != back.face1 || cube[0][0][1] != back.face2)
+    {
+        up_ccw();
+    }
+    back_ccw();
+    back_ccw();
+    search_edges(&front);
+    search_edges(&left);
+    search_edges(&back);
+    search_edges(&right);
 }
 
 void step2()
