@@ -832,18 +832,177 @@ void function_7()  //一个还原顶棱的函数
     right_ccw();
 }
 
+void function1_1(edge_pieces target){
+        if (target.face2_pos[5][2][1])
+        {
+            /* code */
+            back_ccw();
+            back_ccw();
+        }
+        else if (target.face2_pos[5][1][0])
+        {
+            /* code */
+            down_ccw();
+            back_ccw();
+            back_ccw();           
+        }
+        else if (target.face2_pos[5][1][2])
+        {
+            /* code */
+            down_ckw();
+            back_ccw();
+            back_ccw();
+        }
+        else if (target.face2_pos[5][0][1])
+        {
+            down_ckw();
+            down_ckw();
+            back_ccw();
+            back_ccw();
+        }
+        else if (target.face2_pos[1][0][1])
+        {
+            /* code */
+            left_ccw();
+            back_ckw();
+        }
+        else if (target.face2_pos[1][1][0])
+        {
+            /* code */
+            back_ckw();
+        }
+        else if (target.face2_pos[1][1][2])
+        {
+            /* code */
+            left_ccw();
+            left_ccw();
+            back_ckw();
+            left_ckw();
+            left_ckw();
+        }
+        else if (target.face2_pos[1][2][1])
+        {
+            /* code */
+            left_ckw();
+            back_ckw();
+            left_ccw();
+        }
+        else if (target.face2_pos[2][0][1])
+        {
+            /* code */
+            front_ckw();
+            front_ckw();
+            down_ckw();
+            right_ccw();
+            back_ccw();
+            right_ckw();
+        }
+        else if (target.face2_pos[2][1][0])
+        {
+            /* code */
+            left_ckw();
+            down_ccw();
+            back_ccw();
+            back_ccw();
+            left_ccw();
+        }
+        else if (target.face2_pos[2][1][2])
+        {
+            /* code */
+            right_ccw();
+            down_ckw();
+            right_ckw();
+            back_ccw();
+            back_ccw();
+        }
+        else if (target.face2_pos[2][2][1])
+        {
+            /* code */
+            down_ckw();
+            right_ccw();
+            back_ccw();
+            right_ckw();
+        }
+        else if (target.face2_pos[3][0][1])
+        {
+            /* code */
+            right_ckw();
+            back_ccw();
+        }
+
+        else if (target.face2_pos[3][1][0])
+        {
+            /* code */
+            right_ccw();
+            right_ccw();
+            back_ccw();
+            right_ckw();
+            right_ckw();
+        }
+
+        else if (target.face2_pos[3][1][2])
+        {
+            /* code */
+            back_ccw();
+        }
+
+        else if (target.face2_pos[3][2][1])
+        {
+            /* code */
+            right_ccw();
+            back_ccw();
+            right_ckw();
+        }
+
+        else if (target.face2_pos[4][0][1])
+        {
+            /* code */
+            back_ccw();
+            back_ccw();
+            down_ccw();
+            right_ccw();
+            back_ccw();
+            right_ckw();
+        }
+        else if (target.face2_pos[4][1][0])
+        {
+            /* code */
+            back_ckw();
+            down_ccw();
+            right_ccw();
+            back_ccw();
+            right_ckw();
+        }
+        else if (target.face2_pos[4][1][2])
+        {
+            /* code */
+            left_ccw();
+            down_ccw();
+            back_ckw();
+            back_ckw();
+            left_ckw();
+        }
+        else if (target.face2_pos[4][2][1])
+        {
+            /* code */
+            down_ccw();
+            right_ccw();
+            back_ccw();
+            right_ckw();
+        }
+}
+
 void step1()
 {
     //使得棱块和中心块颜色一致
     //转动对着自己的一层完成蓝白棱块
     //转动顶层使得侧面颜色相同，并且转动一层完成红白棱块
-    char centralBlocks[6] = {cube[0][1][1], cube[1][1][1], cube[2][1][1], cube[3][1][1], cube[4][1][1], cube[5][1][1]};
-    char memo[100][6][3][3] = {};
+    char centralBlocks[6] = { cube[0][1][1], cube[1][1][1], cube[2][1][1], cube[3][1][1], cube[4][1][1], cube[5][1][1] };
 
-    edge_pieces front = {centralBlocks[2], centralBlocks[5]};
-    edge_pieces left = {centralBlocks[1], centralBlocks[5]};
-    edge_pieces back = {centralBlocks[4], centralBlocks[5]};
-    edge_pieces right = {centralBlocks[3], centralBlocks[5]};
+    edge_pieces front = { centralBlocks[2], centralBlocks[5] };
+    edge_pieces left = { centralBlocks[1], centralBlocks[5] };
+    edge_pieces back = { centralBlocks[4], centralBlocks[5] };
+    edge_pieces right = { centralBlocks[3], centralBlocks[5] };
     search_edges(&front);
     search_edges(&left);
     search_edges(&back);
@@ -851,7 +1010,7 @@ void step1()
     bool tmark = 0;
 
     //把所有白色棱块转到顶面
-    while (cube[0][0][1] != centralBlocks[5] && cube[0][1][0] != centralBlocks[5] && cube[0][1][2] != centralBlocks[5] && cube[0][2][1] != centralBlocks[5])
+    while (cube[0][0][1] != centralBlocks[5] || cube[0][1][0] != centralBlocks[5] || cube[0][1][2] != centralBlocks[5] || cube[0][2][1] != centralBlocks[5])
     {
         /* 思路
             搜索顶部，看看哪个位置没有白色棱块。
@@ -865,12 +1024,16 @@ void step1()
 
         for (size_t i = 0; i < 4; i++)
         {
+            tmark = (cube[0][0][1] == centralBlocks[5]);
             /* code */
             if (tmark == 1)
             {
                 /* code */
                 up_ccw();
-                tmark = (cube[0][0][1] == centralBlocks[5]);
+                search_edges(&front);
+                search_edges(&left);
+                search_edges(&back);
+                search_edges(&right);
             }
             else
                 break;
@@ -878,651 +1041,16 @@ void step1()
 
         if (!tmark)
         {
-
             if (!(front.face2_pos[0][0][1] || front.face2_pos[0][1][0] || front.face2_pos[0][1][2] || front.face2_pos[0][2][1]))
-            {
-                if (front.face2_pos[5][2][1])
-                {
-                    /* code */
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (front.face2_pos[5][1][0])
-                {
-                    /* code */
-                    down_ckw();
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (front.face2_pos[5][1][2])
-                {
-                    /* code */
-                    down_ccw();
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (front.face2_pos[5][0][1])
-                {
-                    down_ccw();
-                    down_ccw();
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (front.face2_pos[1][0][1])
-                {
-                    /* code */
-                    left_ccw();
-                    back_ckw();
-                }
-                else if (front.face2_pos[1][1][0])
-                {
-                    /* code */
-                    back_ckw();
-                }
-                else if (front.face2_pos[1][1][2])
-                {
-                    /* code */
-                    left_ccw();
-                    left_ccw();
-                    back_ckw();
-                    left_ckw();
-                    left_ckw();
-                }
-                else if (front.face2_pos[1][2][1])
-                {
-                    /* code */
-                    left_ckw();
-                    back_ckw();
-                    left_ccw();
-                }
-                else if (front.face2_pos[2][0][1])
-                {
-                    /* code */
-                    front_ckw();
-                    front_ckw();
-                    down_ccw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-                else if (front.face2_pos[2][1][0])
-                {
-                    /* code */
-                    left_ckw();
-                    down_ckw();
-                    back_ccw();
-                    back_ccw();
-                    left_ccw();
-                }
-                else if (front.face2_pos[2][1][2])
-                {
-                    /* code */
-                    right_ckw();
-                    down_ccw();
-                    right_ccw();
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (front.face2_pos[2][2][1])
-                {
-                    /* code */
-                    down_ccw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-                else if (front.face2_pos[3][0][1])
-                {
-                    /* code */
-                    right_ckw();
-                    back_ccw();
-                }
-
-                else if (front.face2_pos[3][1][0])
-                {
-                    /* code */
-                    right_ccw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                    right_ckw();
-                }
-
-                else if (front.face2_pos[3][1][2])
-                {
-                    /* code */
-                    back_ccw();
-                }
-
-                else if (front.face2_pos[3][2][1])
-                {
-                    /* code */
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-
-                else if (front.face2_pos[4][0][1])
-                {
-                    /* code */
-                    back_ccw();
-                    back_ccw();
-                    down_ckw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-                else if (front.face2_pos[4][1][0])
-                {
-                    /* code */
-                    back_ckw();
-                    down_ckw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-                else if (front.face2_pos[4][1][2])
-                {
-                    /* code */
-                    left_ccw();
-                    down_ckw();
-                    back_ckw();
-                    back_ckw();
-                    left_ckw();
-                }
-                else if (front.face2_pos[4][2][1])
-                {
-                    /* code */
-                    down_ckw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-            }
-
-            else if (!(left.face2_pos[0][0][1] || left.face2_pos[0][1][0] || left.face2_pos[0][1][2] || left.face2_pos[0][2][1]))
-            {
-                if (left.face2_pos[5][2][1])
-                {
-                    /* code */
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (left.face2_pos[5][1][0])
-                {
-                    /* code */
-                    down_ckw();
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (left.face2_pos[5][1][2])
-                {
-                    /* code */
-                    down_ccw();
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (left.face2_pos[5][0][1])
-                {
-                    down_ccw();
-                    down_ccw();
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (left.face2_pos[1][0][1])
-                {
-                    /* code */
-                    left_ccw();
-                    back_ckw();
-                }
-                else if (left.face2_pos[1][1][0])
-                {
-                    /* code */
-                    back_ckw();
-                }
-                else if (left.face2_pos[1][1][2])
-                {
-                    /* code */
-                    left_ccw();
-                    left_ccw();
-                    back_ckw();
-                    left_ckw();
-                    left_ckw();
-                }
-                else if (left.face2_pos[1][2][1])
-                {
-                    /* code */
-                    left_ckw();
-                    back_ckw();
-                    left_ccw();
-                }
-                else if (left.face2_pos[2][0][1])
-                {
-                    /* code */
-                    front_ckw();
-                    front_ckw();
-                    down_ccw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-                else if (left.face2_pos[2][1][0])
-                {
-                    /* code */
-                    left_ckw();
-                    down_ckw();
-                    back_ccw();
-                    back_ccw();
-                    left_ccw();
-                }
-                else if (left.face2_pos[2][1][2])
-                {
-                    /* code */
-                    right_ckw();
-                    down_ccw();
-                    right_ccw();
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (left.face2_pos[2][2][1])
-                {
-                    /* code */
-                    down_ccw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-                else if (left.face2_pos[3][0][1])
-                {
-                    /* code */
-                    right_ckw();
-                    back_ccw();
-                }
-
-                else if (left.face2_pos[3][1][0])
-                {
-                    /* code */
-                    right_ccw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                    right_ckw();
-                }
-
-                else if (left.face2_pos[3][1][2])
-                {
-                    /* code */
-                    back_ccw();
-                }
-
-                else if (left.face2_pos[3][2][1])
-                {
-                    /* code */
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-
-                else if (left.face2_pos[4][0][1])
-                {
-                    /* code */
-                    back_ccw();
-                    back_ccw();
-                    down_ckw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-                else if (left.face2_pos[4][1][0])
-                {
-                    /* code */
-                    back_ckw();
-                    down_ckw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-                else if (left.face2_pos[4][1][2])
-                {
-                    /* code */
-                    left_ccw();
-                    down_ckw();
-                    back_ckw();
-                    back_ckw();
-                    left_ckw();
-                }
-                else if (left.face2_pos[4][2][1])
-                {
-                    /* code */
-                    down_ckw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-            }
-
-            else if (!(right.face2_pos[0][0][1] || right.face2_pos[0][1][0] || right.face2_pos[0][1][2] || right.face2_pos[0][2][1]))
-            {
-                if (right.face2_pos[5][2][1])
-                {
-                    /* code */
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (right.face2_pos[5][1][0])
-                {
-                    /* code */
-                    down_ckw();
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (right.face2_pos[5][1][2])
-                {
-                    /* code */
-                    down_ccw();
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (right.face2_pos[5][0][1])
-                {
-                    down_ccw();
-                    down_ccw();
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (right.face2_pos[1][0][1])
-                {
-                    /* code */
-                    left_ccw();
-                    back_ckw();
-                }
-                else if (right.face2_pos[1][1][0])
-                {
-                    /* code */
-                    back_ckw();
-                }
-                else if (right.face2_pos[1][1][2])
-                {
-                    /* code */
-                    left_ccw();
-                    left_ccw();
-                    back_ckw();
-                    left_ckw();
-                    left_ckw();
-                }
-                else if (right.face2_pos[1][2][1])
-                {
-                    /* code */
-                    left_ckw();
-                    back_ckw();
-                    left_ccw();
-                }
-                else if (right.face2_pos[2][0][1])
-                {
-                    /* code */
-                    front_ckw();
-                    front_ckw();
-                    down_ccw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-                else if (right.face2_pos[2][1][0])
-                {
-                    /* code */
-                    left_ckw();
-                    down_ckw();
-                    back_ccw();
-                    back_ccw();
-                    left_ccw();
-                }
-                else if (right.face2_pos[2][1][2])
-                {
-                    /* code */
-                    right_ckw();
-                    down_ccw();
-                    right_ccw();
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (right.face2_pos[2][2][1])
-                {
-                    /* code */
-                    down_ccw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-                else if (right.face2_pos[3][0][1])
-                {
-                    /* code */
-                    right_ckw();
-                    back_ccw();
-                }
-
-                else if (right.face2_pos[3][1][0])
-                {
-                    /* code */
-                    right_ccw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                    right_ckw();
-                }
-
-                else if (right.face2_pos[3][1][2])
-                {
-                    /* code */
-                    back_ccw();
-                }
-
-                else if (right.face2_pos[3][2][1])
-                {
-                    /* code */
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-
-                else if (right.face2_pos[4][0][1])
-                {
-                    /* code */
-                    back_ccw();
-                    back_ccw();
-                    down_ckw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-                else if (right.face2_pos[4][1][0])
-                {
-                    /* code */
-                    back_ckw();
-                    down_ckw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-                else if (right.face2_pos[4][1][2])
-                {
-                    /* code */
-                    left_ccw();
-                    down_ckw();
-                    back_ckw();
-                    back_ckw();
-                    left_ckw();
-                }
-                else if (right.face2_pos[4][2][1])
-                {
-                    /* code */
-                    down_ckw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-            }
-
-            else if (!(back.face2_pos[0][0][1] || back.face2_pos[0][1][0] || back.face2_pos[0][1][2] || back.face2_pos[0][2][1]))
-            {
-                if (back.face2_pos[5][2][1])
-                {
-                    /* code */
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (back.face2_pos[5][1][0])
-                {
-                    /* code */
-                    down_ckw();
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (back.face2_pos[5][1][2])
-                {
-                    /* code */
-                    down_ccw();
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (back.face2_pos[5][0][1])
-                {
-                    down_ccw();
-                    down_ccw();
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (back.face2_pos[1][0][1])
-                {
-                    /* code */
-                    left_ccw();
-                    back_ckw();
-                }
-                else if (back.face2_pos[1][1][0])
-                {
-                    /* code */
-                    back_ckw();
-                }
-                else if (back.face2_pos[1][1][2])
-                {
-                    /* code */
-                    left_ccw();
-                    left_ccw();
-                    back_ckw();
-                    left_ckw();
-                    left_ckw();
-                }
-                else if (back.face2_pos[1][2][1])
-                {
-                    /* code */
-                    left_ckw();
-                    back_ckw();
-                    left_ccw();
-                }
-                else if (back.face2_pos[2][0][1])
-                {
-                    /* code */
-                    front_ckw();
-                    front_ckw();
-                    down_ccw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-                else if (back.face2_pos[2][1][0])
-                {
-                    /* code */
-                    left_ckw();
-                    down_ckw();
-                    back_ccw();
-                    back_ccw();
-                    left_ccw();
-                }
-                else if (back.face2_pos[2][1][2])
-                {
-                    /* code */
-                    right_ckw();
-                    down_ccw();
-                    right_ccw();
-                    back_ccw();
-                    back_ccw();
-                }
-                else if (back.face2_pos[2][2][1])
-                {
-                    /* code */
-                    down_ccw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-                else if (back.face2_pos[3][0][1])
-                {
-                    /* code */
-                    right_ckw();
-                    back_ccw();
-                }
-
-                else if (back.face2_pos[3][1][0])
-                {
-                    /* code */
-                    right_ccw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                    right_ckw();
-                }
-
-                else if (back.face2_pos[3][1][2])
-                {
-                    /* code */
-                    back_ccw();
-                }
-
-                else if (back.face2_pos[3][2][1])
-                {
-                    /* code */
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-
-                else if (back.face2_pos[4][0][1])
-                {
-                    /* code */
-                    back_ccw();
-                    back_ccw();
-                    down_ckw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-                else if (back.face2_pos[4][1][0])
-                {
-                    /* code */
-                    back_ckw();
-                    down_ckw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-                else if (back.face2_pos[4][1][2])
-                {
-                    /* code */
-                    left_ccw();
-                    down_ckw();
-                    back_ckw();
-                    back_ckw();
-                    left_ckw();
-                }
-                else if (back.face2_pos[4][2][1])
-                {
-                    /* code */
-                    down_ckw();
-                    right_ccw();
-                    back_ccw();
-                    right_ckw();
-                }
-            }
+                    function1_1(front);
+            else  if (!(left.face2_pos[0][0][1] || left.face2_pos[0][1][0] || left.face2_pos[0][1][2] || left.face2_pos[0][2][1]))
+                    function1_1(left);
+            else  if (!(right.face2_pos[0][0][1] || right.face2_pos[0][1][0] || right.face2_pos[0][1][2] || right.face2_pos[0][2][1]))
+                    function1_1(right);
+            else  if (!(back.face2_pos[0][0][1] || back.face2_pos[0][1][0] || back.face2_pos[0][1][2] || back.face2_pos[0][2][1]))
+                    function1_1(back);
         }
+        dbg_show();
     }
 }
 
