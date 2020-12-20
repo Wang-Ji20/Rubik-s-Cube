@@ -1317,9 +1317,9 @@ void step2()
         {
             if (BRD.face1_pos[5][2][2] || BRD.face2_pos[5][2][2] || BRD.face1_pos[3][2][2])
             {
-                left_ckw();
+                right_ccw();
                 up_ckw();
-                left_ccw();
+                right_ckw();
                 search_corners(&BRD);
             }
         }
