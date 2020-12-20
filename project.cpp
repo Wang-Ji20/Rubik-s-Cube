@@ -1245,7 +1245,7 @@ void step2()
             }
         }
     }
-
+    dbg_show();
     search_corners(&BLD);
     while (!(BLD.face1_pos[4][2][2] && BLD.face2_pos[1][2][0] && BLD.face3_pos[5][2][0]))
     {
@@ -1272,14 +1272,14 @@ void step2()
         }
         else
         {
-            if (BLD.face1_pos[5][2][2] || BLD.face2_pos[5][2][2] || BLD.face1_pos[1][2][0])
+            if (BLD.face1_pos[5][2][2] || BLD.face2_pos[5][2][2] || BLD.face3_pos[5][2][2])
             {
                 right_ccw();
                 up_ckw();
                 right_ckw();
                 search_corners(&BLD);
             }
-            else if (BLD.face1_pos[5][2][0] || BLD.face2_pos[5][2][0] || BLD.face3_pos[5][2][0])
+            else if (BLD.face1_pos[5][2][0] || BLD.face2_pos[5][2][0] || BLD.face1_pos[1][2][0])
             {
                 left_ckw();
                 up_ckw();
