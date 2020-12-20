@@ -1425,12 +1425,35 @@ void step3(char a, char b, char c, char d, char e, char f)//  还原中间棱块
 
 void step4() //顶部十字
 {
-    while (!(cube[0][0][1] == cube[0][1][1] && cube[0][1][0] == cube[0][1][1] && cube[0][2][1] == cube[0][1][1] && cube[0][1][2] == cube[0][1][1]))
+    int cnt = 0;
+    if (cube[0][0][1] == cube[0][1][1])
+        cnt += 1;
+    if (cube[0][1][0] == cube[0][1][1])
+        cnt += 2;
+    if (cube[0][1][2] == cube[0][1][1])
+        cnt += 2;
+    if (cube[0][2][1] == cube[0][1][1])
+        cnt += 1;
+    if (cnt == 6)
+        return;
+    if (cnt == 0)
     {
-        if (cube[0][1][1] != cube[2][0][1])
+        function_1();
+        up_ckw();
+        function_1();
+    }
+    else if (cnt % 2 == 0)   //代表两个在一条线上
+    {
+        while (cube[0][1][0] != cube[0][1][1])
             up_ckw();
-        else
-            function_1();
+        function_1();
+    }
+    else if (cnt % 2 != 0)
+    {
+        while (cube[0][1][0] != cube[0][1][1] || cube[0][0][1] != cube[0][1][1])
+            up_ckw();
+        function_1();
+        function_1();
     }
 }
 
