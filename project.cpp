@@ -1439,6 +1439,7 @@ void step4() //顶部十字
     if (cnt == 0)
     {
         function_1();
+        function_1();
         up_ckw();
         function_1();
     }
