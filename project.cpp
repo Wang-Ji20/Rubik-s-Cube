@@ -525,6 +525,7 @@ void up_ckw() //顺时针,下同
         cube[4][0][i] = cube[1][0][i];
         cube[1][0][i] = f[i];
     }
+    cout << "U" << ' ';
 }
 void up_ccw() //逆时针,下同
 {
@@ -539,6 +540,7 @@ void up_ccw() //逆时针,下同
         cube[4][0][i] = cube[3][0][i];
         cube[3][0][i] = f[i];
     }
+    cout << "Ui" << ' ';
 }
 void left_ckw()
 {
@@ -553,6 +555,7 @@ void left_ckw()
         cube[5][i][0] = cube[2][i][0];
         cube[2][i][0] = u[i];
     }
+    cout << "L" << ' ';
 }
 void left_ccw()
 {
@@ -567,7 +570,7 @@ void left_ccw()
         cube[5][i][0] = cube[4][2 - i][2];
         cube[4][2 - i][2] = u[i];
     }
-
+    cout << "Li" << ' ';
 }
 void front_ckw()
 {
@@ -582,6 +585,7 @@ void front_ckw()
         cube[5][0][2 - i] = cube[3][i][0];
         cube[3][i][0] = u[i];
     }
+    cout << "F" << ' ';
 }
 void front_ccw()
 {
@@ -596,6 +600,7 @@ void front_ccw()
         cube[5][0][2 - i] = cube[1][2 - i][2];
         cube[1][2 - i][2] = u[i];
     }
+    cout << "Fi" << ' ';
 }
 void right_ckw()
 {
@@ -610,6 +615,7 @@ void right_ckw()
         cube[5][i][2] = cube[4][2 - i][0];
         cube[4][2 - i][0] = u[i];
     }
+    cout << "R" << ' ';
 }
 void right_ccw()
 {
@@ -624,6 +630,7 @@ void right_ccw()
         cube[5][i][2] = cube[2][i][2];
         cube[2][i][2] = u[i];
     }
+    cout << "Ri" << ' ';
 }
 void back_ckw()
 {
@@ -638,6 +645,7 @@ void back_ckw()
         cube[1][2 - i][0] = cube[0][0][i];
         cube[0][0][i] = r[i];
     }
+    cout << "B" << ' ';
 }
 void back_ccw()
 {
@@ -652,6 +660,7 @@ void back_ccw()
         cube[1][2 - i][0] = cube[5][2][2 - i];
         cube[5][2][2 - i] = r[i]; //TODO
     }
+    cout << "Bi" << ' ';
 }
 void down_ckw()
 {
@@ -666,6 +675,7 @@ void down_ckw()
         cube[4][2][i] = cube[3][2][i];
         cube[3][2][i] = f[i];
     }
+    cout << "D" << ' ';
 }
 void down_ccw()
 {
@@ -680,6 +690,7 @@ void down_ccw()
         cube[4][2][i] = cube[1][2][i];
         cube[1][2][i] = f[i];
     }
+    cout << "Di" << ' ';
 }
 
 void dbg_show() //展示魔方当前状态,debug用
@@ -1014,10 +1025,18 @@ void step1()
     //转动顶层使得侧面颜色相同，并且转动一层完成红白棱块
     char centralBlocks[6] = { cube[0][1][1], cube[1][1][1], cube[2][1][1], cube[3][1][1], cube[4][1][1], cube[5][1][1] };
 
-    edge_pieces front = { centralBlocks[2], centralBlocks[5] };
-    edge_pieces left = { centralBlocks[1], centralBlocks[5] };
-    edge_pieces back = { centralBlocks[4], centralBlocks[5] };
-    edge_pieces right = { centralBlocks[3], centralBlocks[5] };
+    edge_pieces front;
+    front.face1 = centralBlocks[2];
+    front.face2 = centralBlocks[5];
+    edge_pieces left;
+    left.face1 = centralBlocks[1];
+    left.face2 = centralBlocks[5];
+    edge_pieces back;
+    back.face1 = centralBlocks[4];
+    back.face2 = centralBlocks[5];
+    edge_pieces right;
+    right.face1 = centralBlocks[3];
+    right.face2 = centralBlocks[5];
     search_edges(&front);
     search_edges(&left);
     search_edges(&back);
@@ -1065,7 +1084,6 @@ void step1()
             else  if (!(back.face2_pos[0][0][1] || back.face2_pos[0][1][0] || back.face2_pos[0][1][2] || back.face2_pos[0][2][1]))
                 function1_1(back);
         }
-        dbg_show();
     }
 
     search_edges(&front);
@@ -1098,7 +1116,7 @@ void step1()
     while (cube[3][0][1] != right.face1 || cube[0][1][2] != right.face2)
     {
         up_ccw();
-        dbg_show();
+         
     }
     right_ccw();
     right_ccw();
@@ -1122,11 +1140,23 @@ void step1()
 
 void step2()
 {
-    corner_pieces FLD = { cube[2][1][1],cube[1][1][1],cube[5][1][1] };
-    corner_pieces FRD = { cube[2][1][1],cube[3][1][1],cube[5][1][1] };
-    corner_pieces BLD = { cube[4][1][1],cube[1][1][1],cube[5][1][1] };
-    corner_pieces BRD = { cube[4][1][1],cube[3][1][1],cube[5][1][1] };
-    dbg_show();
+    corner_pieces FLD;
+    FLD.face1 = cube[2][1][1];
+    FLD.face2 = cube[1][1][1];
+    FLD.face3 = cube[5][1][1];
+    corner_pieces FRD;
+    FRD.face1 = cube[2][1][1];
+    FRD.face2 = cube[3][1][1];
+    FRD.face3 = cube[5][1][1];
+    corner_pieces BLD;
+    BLD.face1 = cube[4][1][1];
+    BLD.face2 = cube[1][1][1];
+    BLD.face3 = cube[5][1][1];
+    corner_pieces BRD;
+    BRD.face1 = cube[4][1][1];
+    BRD.face2 = cube[3][1][1];
+    BRD.face3 = cube[5][1][1];
+     
     search_corners(&FLD);
     search_corners(&FRD);
     search_corners(&BLD);
@@ -1245,7 +1275,7 @@ void step2()
             }
         }
     }
-    dbg_show();
+     
     search_corners(&BLD);
     while (!(BLD.face1_pos[4][2][2] && BLD.face2_pos[1][2][0] && BLD.face3_pos[5][2][0]))
     {
@@ -1324,23 +1354,31 @@ void step2()
             }
         }
     }
-    dbg_show();
+     
 }
 
 void step3(char a, char b, char c, char d, char e, char f)//  还原中间棱块 ,将6个面中心块具体颜色输入                                                   
 {
-    edge_pieces A = { b,c,{{{0}}},{{{0}}} };//先写一种，其余同理
-    edge_pieces B = { c,d,{{{0}}},{{{0}}} };
-    edge_pieces C = { d,e,{{{0}}},{{{0}}} };
-    edge_pieces D = { e,b,{{{0}}},{{{0}}} };
+    edge_pieces A;
+    A.face1 = b;
+    A.face2 = c;
+    edge_pieces B;
+    B.face1 = c;
+    B.face2 = d;
+    edge_pieces C;
+    C.face1 = d;
+    C.face2 = e;
+    edge_pieces D;
+    D.face1 = e;
+    D.face2 = b;
     search_edges(&A);
     if (A.face1_pos[2][1][0] == 1 && A.face2_pos[1][1][2] == 1)
         function_3_1();
     else if (!(A.face2_pos[2][1][0] == 1 && A.face1_pos[1][1][2] == 1))
     {
-        if((A.face1_pos[3][1][0] == 1 && A.face2_pos[2][1][2] == 1) || (A.face2_pos[3][1][0] == 1 && A.face1_pos[2][1][2] == 1))
+        if ((A.face1_pos[3][1][0] == 1 && A.face2_pos[2][1][2] == 1) || (A.face2_pos[3][1][0] == 1 && A.face1_pos[2][1][2] == 1))
             function_4_2();
-        else if((A.face1_pos[4][1][0] == 1 && A.face2_pos[3][1][2] == 1) || (A.face2_pos[4][1][0] == 1 && A.face1_pos[3][1][2] == 1))
+        else if ((A.face1_pos[4][1][0] == 1 && A.face2_pos[3][1][2] == 1) || (A.face2_pos[4][1][0] == 1 && A.face1_pos[3][1][2] == 1))
             function_4_3();
         else if ((A.face1_pos[1][1][0] == 1 && A.face2_pos[4][1][2] == 1) || (A.face2_pos[1][1][0] == 1 && A.face1_pos[4][1][2] == 1))
             function_4_4();
@@ -1354,7 +1392,7 @@ void step3(char a, char b, char c, char d, char e, char f)//  还原中间棱块
         else if (A.face1_pos[0][2][1] == 1 && A.face2_pos[2][0][1] == 1)
             function_5_1();
     }
-    dbg_show();
+     
     search_edges(&B);
     if (B.face1_pos[3][1][0] == 1 && B.face2_pos[2][1][2] == 1)
         function_3_2();
@@ -1376,7 +1414,7 @@ void step3(char a, char b, char c, char d, char e, char f)//  还原中间棱块
         else if (B.face1_pos[0][1][2] == 1 && B.face2_pos[3][0][1] == 1)
             function_5_2();
     }
-    dbg_show();
+     
     search_edges(&C);
     if (C.face1_pos[4][1][0] == 1 && C.face2_pos[3][1][2] == 1)
         function_3_3();
@@ -1398,7 +1436,7 @@ void step3(char a, char b, char c, char d, char e, char f)//  还原中间棱块
         else if (C.face1_pos[0][0][1] == 1 && C.face2_pos[4][0][1] == 1)
             function_5_3();
     }
-    dbg_show();
+     
     search_edges(&D);
     if (D.face1_pos[1][1][0] == 1 && D.face2_pos[4][1][2] == 1)
         function_3_4();
@@ -1420,7 +1458,7 @@ void step3(char a, char b, char c, char d, char e, char f)//  还原中间棱块
         else if (D.face1_pos[0][1][0] == 1 && D.face2_pos[1][0][1] == 1)
             function_5_4();
     }
-    dbg_show();
+     
 }
 
 void step4() //顶部十字
@@ -1555,7 +1593,6 @@ int main()
             for (int k = 0; k < 3; k++)
                 cin >> cube[corres[i]][j][k];
     char A = cube[0][1][1], B = cube[1][1][1], C = cube[2][1][1], D = cube[3][1][1], E = cube[4][1][1], F = cube[5][1][1];//指示6个面中心面块颜色
-    dbg_show();
     step1();
     step2();
     step3(A, B, C, D, E, F);
@@ -1563,6 +1600,5 @@ int main()
     step5();
     step6();
     step7();
-    dbg_show();
     return 0;
 }
