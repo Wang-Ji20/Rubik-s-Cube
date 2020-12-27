@@ -22,7 +22,7 @@
  * R-红色  B-蓝色  Y-黄色  G-绿色  O-橙色  W-白色
  * *******************************************************/
 #include <iostream>
-#include <stdlib.h>
+#include <vector>
 using namespace std;
 
 //== Global Variables and Structures ==//
@@ -41,7 +41,7 @@ struct corner_pieces {
     int face2_pos[6][3][3] = { {{0}} };
     int face3_pos[6][3][3] = { {{0}} };
 };
-
+vector <int> out; //顺0, 1, 2, 3, 4, 5, 逆10, 11, 12, 13, 14, 15
 
 
 // ==== Claim of Functions
@@ -58,6 +58,86 @@ void function_8();
 void function_9();
 void function_10();
 //== Functions ==//
+
+void refine()
+{
+    if(out.empty())
+        return;
+    int cnt3 = 0;
+    auto i = out.begin();
+    while (i != out.end())
+    {
+        if (*i != *(i + 1))
+            cnt3 = 0;
+        if (*i == *(i + 1))
+            cnt3++;
+        if (cnt3 == 3)
+        {
+            int p = *i;
+            out.erase(i - 1, i + 1);
+            if (p >= 10)
+                out.insert(i - 1, p - 10);
+            else
+                out.insert(i - 1, p);
+            cnt3 = 0;
+            i = out.begin();
+            continue;
+        }
+        if (abs(*i - *(i + 1)) == 10)
+        {
+            out.erase(i, i + 1);
+            i = out.begin();
+            continue;
+        }
+        i++;
+    }
+}
+
+void print()
+{
+    for (vector<int>::iterator i = out.begin(); i != out.end(); i++)
+    {
+        switch (*i)
+        {
+        case 0:
+            cout << "U ";
+            break;
+        case 1:
+            cout << "L ";
+            break;
+        case 2:
+            cout << "F ";
+            break;
+        case 3:
+            cout << "R ";
+            break;
+        case 4:
+            cout << "B ";
+            break;
+        case 5:
+            cout << "D ";
+            break;
+        case 10:
+            cout << "Ui ";
+            break;
+        case 11:
+            cout << "Li ";
+            break;
+        case 12:
+            cout << "Fi ";
+            break;
+        case 13:
+            cout << "Ri ";
+            break;
+        case 14:
+            cout << "Bi ";
+            break;
+        case 15:
+            cout << "Di ";
+            break;
+        }
+    }
+}
 
 void search_corners(corner_pieces* corner)//寻找特定角块,
 {//每个块的顺序：abc,acb,bac,bca,cab,cba
@@ -491,6 +571,7 @@ void search_edges(edge_pieces* edge)
 }
 
 
+
 void face_ckw(int face) //简化旋转函数的两个函数
 {
     int tmp[3][3];
@@ -525,7 +606,7 @@ void up_ckw() //顺时针,下同
         cube[4][0][i] = cube[1][0][i];
         cube[1][0][i] = f[i];
     }
-    cout << "U" << ' ';
+    out.push_back(0);
 }
 void up_ccw() //逆时针,下同
 {
@@ -540,7 +621,7 @@ void up_ccw() //逆时针,下同
         cube[4][0][i] = cube[3][0][i];
         cube[3][0][i] = f[i];
     }
-    cout << "Ui" << ' ';
+    out.push_back(10);
 }
 void left_ckw()
 {
@@ -555,7 +636,7 @@ void left_ckw()
         cube[5][i][0] = cube[2][i][0];
         cube[2][i][0] = u[i];
     }
-    cout << "L" << ' ';
+    out.push_back(1);
 }
 void left_ccw()
 {
@@ -570,7 +651,7 @@ void left_ccw()
         cube[5][i][0] = cube[4][2 - i][2];
         cube[4][2 - i][2] = u[i];
     }
-    cout << "Li" << ' ';
+    out.push_back(11);
 }
 void front_ckw()
 {
@@ -585,7 +666,7 @@ void front_ckw()
         cube[5][0][2 - i] = cube[3][i][0];
         cube[3][i][0] = u[i];
     }
-    cout << "F" << ' ';
+    out.push_back(2);
 }
 void front_ccw()
 {
@@ -600,7 +681,7 @@ void front_ccw()
         cube[5][0][2 - i] = cube[1][2 - i][2];
         cube[1][2 - i][2] = u[i];
     }
-    cout << "Fi" << ' ';
+    out.push_back(12);
 }
 void right_ckw()
 {
@@ -615,7 +696,7 @@ void right_ckw()
         cube[5][i][2] = cube[4][2 - i][0];
         cube[4][2 - i][0] = u[i];
     }
-    cout << "R" << ' ';
+    out.push_back(3);
 }
 void right_ccw()
 {
@@ -630,7 +711,7 @@ void right_ccw()
         cube[5][i][2] = cube[2][i][2];
         cube[2][i][2] = u[i];
     }
-    cout << "Ri" << ' ';
+    out.push_back(13);
 }
 void back_ckw()
 {
@@ -645,7 +726,7 @@ void back_ckw()
         cube[1][2 - i][0] = cube[0][0][i];
         cube[0][0][i] = r[i];
     }
-    cout << "B" << ' ';
+    out.push_back(4);
 }
 void back_ccw()
 {
@@ -660,7 +741,7 @@ void back_ccw()
         cube[1][2 - i][0] = cube[5][2][2 - i];
         cube[5][2][2 - i] = r[i]; //TODO
     }
-    cout << "Bi" << ' ';
+    out.push_back(14);
 }
 void down_ckw()
 {
@@ -675,7 +756,7 @@ void down_ckw()
         cube[4][2][i] = cube[3][2][i];
         cube[3][2][i] = f[i];
     }
-    cout << "D" << ' ';
+    out.push_back(5);
 }
 void down_ccw()
 {
@@ -690,7 +771,7 @@ void down_ccw()
         cube[4][2][i] = cube[1][2][i];
         cube[1][2][i] = f[i];
     }
-    cout << "Di" << ' ';
+    out.push_back(15);
 }
 
 void dbg_show() //展示魔方当前状态,debug用
@@ -1600,5 +1681,8 @@ int main()
     step5();
     step6();
     step7();
+    print();
+    refine();
+    print();
     return 0;
 }
